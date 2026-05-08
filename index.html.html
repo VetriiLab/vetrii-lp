@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vetrii — Passaporte Veicular Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:     #090F1C;
+      --navy-95:  #0C1425;
+      --navy-90:  #101A2E;
+      --navy-80:  #172038;
+      --navy-70:  #1F2C4A;
+      --purple:   #6251DA;
+      --purple-dk:#4F41B0;
+      --purple-li:#EDE9FC;
+      --purple-mu:#8578E0;
+      --sand:     #F5F4F1;
+      --white:    #FFFFFF;
+      --g100:     #EFEEE9;
+      --g200:     #E0DED8;
+      --g300:     #C4C1B8;
+      --g400:     #97948C;
+      --g500:     #6A6760;
+      --g600:     #3E3B35;
+      --txt:      #090F1C;
+      --txts:     #3E3B35;
+      --txtm:     #97948C;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;color:var(--txt);background:var(--sand);overflow-x:hidden;}
+    section[id]{scroll-margin-top:72px;}
+    a{text-decoration:none;color:inherit;}
+
+    .wrap{max-width:1280px;margin:0 auto;padding:0 2.5rem;}
+    @media(min-width:1200px){.wrap{padding:0 4rem;}}
+
+    /* ════════════════════════════════════
+       HEADER — premium multi-menu
+    ════════════════════════════════════ */
+    .hdr{
+      position:fixed;top:0;left:0;right:0;z-index:200;
+      transition:all 0.4s;
+    }
+    .hdr.solid{
+      background:rgba(9,15,28,0.96);
+      backdrop-filter:blur(24px);
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+
+    /* announcement bar */
+    .hdr-bar{
+      background:var(--purple);
+      display:flex;align-items:center;justify-content:center;
+      gap:12px;padding:9px 24px;font-size:12px;font-weight:600;
+      color:rgba(255,255,255,0.85);
+      transition:all 0.4s;overflow:hidden;max-height:40px;
+    }
+    .hdr-bar a{color:white;font-weight:700;display:flex;align-items:center;gap:4px;}
+    .hdr-bar a svg{width:12px;height:12px;}
+    .hdr-bar.hidden{max-height:0;padding-top:0;padding-bottom:0;}
+    .hdr-bar-close{width:20px;height:20px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.5);position:absolute;right:24px;display:flex;align-items:center;justify-content:center;}
+    .hdr-bar-close:hover{color:white;}
+
+    .hdr-main{
+      display:flex;align-items:center;justify-content:space-between;
+      height:68px;
+    }
+    .logo{display:flex;align-items:center;gap:10px;}
+    .logo-mark{width:32px;height:32px;background:var(--purple);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:white;letter-spacing:-0.02em;}
+    .logo-text{font-weight:700;font-size:18px;color:white;letter-spacing:-0.03em;}
+
+    /* nav items */
+    .nav-items{display:flex;align-items:center;gap:0;}
+    .nav-item{position:relative;}
+    .nav-link{
+      display:flex;align-items:center;gap:5px;
+      padding:8px 16px;font-size:13px;font-weight:600;
+      color:rgba(255,255,255,0.5);transition:color 0.2s;cursor:pointer;
+      background:none;border:none;font-family:inherit;
+    }
+    .nav-link:hover,.nav-item.active .nav-link{color:white;}
+    .nav-link svg{width:10px;height:10px;transition:transform 0.25s;}
+    .nav-item.active .nav-link svg{transform:rotate(180deg);}
+
+    /* mega panels */
+    .mega{
+      position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%) translateY(8px);
+      opacity:0;visibility:hidden;pointer-events:none;
+      transition:all 0.28s cubic-bezier(0.16,1,0.3,1);
+      filter:drop-shadow(0 24px 60px rgba(0,0,0,0.25));
+    }
+    .nav-item.active .mega{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+
+    /* Soluções mega */
+    .mega-sol{width:700px;background:white;border:1px solid var(--g200);}
+    .mega-sol-inner{display:grid;grid-template-columns:220px 1fr;}
+    .mega-sol-sidebar{background:var(--navy);padding:28px 24px;display:flex;flex-direction:column;gap:4px;}
+    .mega-sol-sidebar-title{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.05);}
+    .mega-sol-link{display:flex;align-items:center;gap:10px;padding:11px 12px;font-size:13px;font-weight:600;color:rgba(255,255,255,0.4);transition:all 0.2s;}
+    .mega-sol-link:hover{color:white;background:rgba(255,255,255,0.04);}
+    .mega-sol-link .dot{width:6px;height:6px;background:var(--purple);flex-shrink:0;}
+    .mega-sol-content{padding:24px 28px;}
+    .mega-sol-featured{display:grid;gap:8px;}
+    .mega-sol-card{display:flex;align-items:flex-start;gap:14px;padding:14px;transition:background 0.15s;cursor:pointer;}
+    .mega-sol-card:hover{background:var(--sand);}
+    .mega-sol-icon{width:38px;height:38px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .mega-sol-icon svg{width:18px;height:18px;color:var(--purple-mu);}
+    .mega-sol-card h4{font-size:13px;font-weight:700;color:var(--txt);margin-bottom:2px;}
+    .mega-sol-card p{font-size:12px;color:var(--txtm);line-height:1.5;}
+    .mega-sol-footer{border-top:1px solid var(--g100);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;}
+    .mega-sol-footer span{font-size:12px;color:var(--txtm);}
+    .mega-sol-footer a{font-size:12px;font-weight:700;color:var(--purple);display:flex;align-items:center;gap:4px;}
+
+    /* Recursos mega */
+    .mega-res{width:600px;background:white;border:1px solid var(--g200);}
+    .mega-res-inner{display:grid;grid-template-columns:1fr 1fr;}
+    .mega-res-col{padding:28px;}
+    .mega-res-col + .mega-res-col{border-left:1px solid var(--g100);}
+    .mega-res-title{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--txtm);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--g100);}
+    .mega-res-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--g100);}
+    .mega-res-item:last-child{border-bottom:none;}
+    .mega-res-ico{width:32px;height:32px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .mega-res-ico svg{width:15px;height:15px;color:var(--purple-mu);}
+    .mega-res-item h4{font-size:13px;font-weight:700;color:var(--txt);}
+    .mega-res-item p{font-size:11px;color:var(--txtm);margin-top:1px;}
+    .mega-res-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);background:var(--purple-li);padding:2px 7px;margin-left:6px;}
+    .mega-res-footer{border-top:1px solid var(--g100);padding:16px 28px;background:var(--sand);display:flex;gap:20px;}
+    .mega-res-footer a{font-size:12px;font-weight:700;color:var(--txts);display:flex;align-items:center;gap:4px;}
+    .mega-res-footer a:hover{color:var(--purple);}
+    .mega-res-footer a svg{width:12px;height:12px;}
+
+    /* Empresa mega */
+    .mega-emp{width:480px;background:white;border:1px solid var(--g200);}
+    .mega-emp-inner{padding:24px;}
+    .mega-emp-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:20px;}
+    .mega-emp-link{display:flex;align-items:center;gap:10px;padding:12px;transition:background 0.15s;}
+    .mega-emp-link:hover{background:var(--sand);}
+    .mega-emp-link svg{width:16px;height:16px;color:var(--g300);}
+    .mega-emp-link span{font-size:13px;font-weight:700;color:var(--txt);}
+    .mega-emp-highlight{background:var(--navy);padding:20px;display:flex;align-items:center;gap:16px;}
+    .mega-emp-highlight-text h4{font-size:13px;font-weight:700;color:white;}
+    .mega-emp-highlight-text p{font-size:12px;color:rgba(255,255,255,0.3);margin-top:2px;}
+    .mega-emp-highlight-text a{font-size:12px;font-weight:700;color:var(--purple-mu);margin-top:8px;display:flex;align-items:center;gap:4px;}
+    .mega-emp-highlight-icon{width:44px;height:44px;background:rgba(98,81,218,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .mega-emp-highlight-icon svg{width:22px;height:22px;color:var(--purple-mu);}
+
+    .nav-actions{display:flex;align-items:center;gap:8px;}
+    .btn-demo{background:var(--purple);color:white;font-size:13px;font-weight:700;padding:10px 24px;border:none;cursor:pointer;font-family:inherit;transition:all 0.3s;letter-spacing:-0.01em;}
+    .btn-demo:hover{background:var(--purple-dk);}
+    .btn-login{font-size:13px;font-weight:600;color:rgba(255,255,255,0.4);padding:10px 16px;transition:color 0.2s;}
+    .btn-login:hover{color:white;}
+
+    /* mobile toggle */
+    .mob-btn{display:none;width:44px;height:44px;background:none;border:1px solid rgba(255,255,255,0.1);cursor:pointer;position:relative;}
+    .mob-btn span{display:block;width:18px;height:1.5px;background:white;position:absolute;left:13px;transition:all 0.3s;}
+    .mob-btn span:nth-child(1){top:16px;}
+    .mob-btn span:nth-child(2){top:22px;}
+    .mob-btn span:nth-child(3){top:28px;}
+    .mob-btn.open span:nth-child(1){top:22px;transform:rotate(45deg);}
+    .mob-btn.open span:nth-child(2){opacity:0;}
+    .mob-btn.open span:nth-child(3){top:22px;transform:rotate(-45deg);}
+    .mob-panel{display:none;position:absolute;top:100%;left:0;right:0;background:var(--navy);border-top:1px solid rgba(255,255,255,0.05);padding:20px 24px 32px;flex-direction:column;gap:2px;}
+    .mob-panel.open{display:flex;}
+    .mob-panel a{display:block;padding:14px 0;font-size:15px;font-weight:600;color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.04);}
+    .mob-panel a:hover{color:white;}
+    .mob-panel .mob-demo{background:var(--purple);color:white;text-align:center;padding:14px;margin-top:12px;border:none;font-weight:700;font-size:14px;}
+
+    @media(max-width:1023px){
+      .nav-items,.nav-actions{display:none;}
+      .mob-btn{display:flex;align-items:center;justify-content:center;}
+    }
+
+    /* ════════════════════════════════════
+       HERO
+    ════════════════════════════════════ */
+    .hero{
+      background:var(--navy);
+      position:relative;overflow:hidden;
+      padding:200px 0 160px;
+      min-height:100vh;display:flex;align-items:center;
+    }
+    .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;pointer-events:none;}
+    .hero-video-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(9,15,28,0.82) 0%,rgba(9,15,28,0.65) 50%,rgba(9,15,28,0.75) 100%);pointer-events:none;}
+    .hero-glow{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(98,81,218,0.07) 0%,transparent 65%);top:-300px;right:-200px;pointer-events:none;z-index:1;}
+    .hero-glow2{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(98,81,218,0.04) 0%,transparent 65%);bottom:-200px;left:-100px;pointer-events:none;z-index:1;}
+    .hero-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:1;}
+    .hero-content{position:relative;z-index:2;width:100%;}
+
+    .hero-layout{display:grid;grid-template-columns:1fr;gap:80px;align-items:center;}
+    @media(min-width:1024px){.hero-layout{grid-template-columns:1.2fr 0.8fr;gap:100px;}}
+
+    .hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:32px;}
+    .hero-eyebrow-line{width:40px;height:1px;background:var(--purple);}
+    .hero-eyebrow span{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--purple-mu);}
+
+    .hero h1{font-size:clamp(3rem,6vw,5rem);font-weight:800;line-height:1.0;letter-spacing:-0.04em;color:white;}
+    .hero h1 em{font-style:normal;color:var(--purple-mu);}
+
+    .hero-body{margin-top:32px;font-size:18px;line-height:1.75;color:rgba(255,255,255,0.32);max-width:480px;}
+    .hero-body strong{color:rgba(255,255,255,0.65);font-weight:600;}
+
+    .hero-actions{margin-top:52px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+    .btn-p{display:inline-flex;align-items:center;gap:10px;background:var(--purple);color:white;font-size:14px;font-weight:700;padding:17px 36px;border:none;cursor:pointer;font-family:inherit;transition:all 0.3s;letter-spacing:-0.01em;}
+    .btn-p:hover{background:var(--purple-dk);box-shadow:0 16px 40px rgba(98,81,218,0.25);}
+    .btn-p svg{width:16px;height:16px;transition:transform 0.3s;}
+    .btn-p:hover svg{transform:translateX(4px);}
+    .btn-g{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,0.35);font-size:14px;font-weight:600;padding:17px 28px;border:1px solid rgba(255,255,255,0.1);transition:all 0.3s;}
+    .btn-g:hover{color:white;border-color:rgba(255,255,255,0.22);}
+
+    .hero-trust{margin-top:72px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+    .hero-trust span{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.15);}
+    .trust-pills{display:flex;gap:8px;flex-wrap:wrap;}
+    .trust-pill{font-size:11px;font-weight:700;color:rgba(255,255,255,0.25);padding:5px 14px;border:1px solid rgba(255,255,255,0.07);}
+
+    /* Passport */
+    .passport{animation:fl 9s ease-in-out infinite;}
+    @keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+    .psp{background:rgba(255,255,255,0.04);backdrop-filter:blur(30px);border:1px solid rgba(255,255,255,0.07);}
+    .psp-head{display:flex;justify-content:space-between;align-items:center;padding:24px 28px;border-bottom:1px solid rgba(255,255,255,0.04);}
+    .psp-brand{display:flex;align-items:center;gap:10px;}
+    .psp-brand .m{width:26px;height:26px;background:var(--purple);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:10px;}
+    .psp-brand .t{font-size:12px;font-weight:700;color:white;}
+    .psp-brand .s{font-size:10px;color:rgba(255,255,255,0.18);}
+    .psp-status{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple-mu);border:1px solid rgba(98,81,218,0.2);padding:4px 14px;}
+    .psp-body{padding:4px;}
+    .psp-row{display:grid;grid-template-columns:1fr 1fr;}
+    .psp-row.full{grid-template-columns:1fr;}
+    .psp-cell{padding:16px 24px;border:1px solid rgba(255,255,255,0.03);}
+    .psp-lbl{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.15);margin-bottom:5px;}
+    .psp-val{font-size:14px;font-weight:700;color:white;}
+    .psp-sub{font-size:11px;color:rgba(255,255,255,0.2);margin-top:3px;}
+    .psp-bar{display:flex;gap:2px;margin-top:8px;}
+    .psp-bar span{flex:1;height:3px;}
+    .psp-footer{padding:16px 28px;background:rgba(98,81,218,0.06);border-top:1px solid rgba(98,81,218,0.1);display:flex;align-items:center;justify-content:space-between;}
+    .psp-footer span{font-size:11px;color:rgba(255,255,255,0.2);}
+    .psp-footer a{font-size:11px;font-weight:700;color:var(--purple-mu);display:flex;align-items:center;gap:4px;}
+
+    /* ════════════════════════════════════
+       STATS
+    ════════════════════════════════════ */
+    .stats{background:white;border-bottom:1px solid var(--g200);}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+    @media(max-width:700px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+    .stat-cell{padding:52px 0;text-align:center;border-right:1px solid var(--g200);}
+    .stat-cell:last-child{border-right:none;}
+    @media(max-width:700px){.stat-cell:nth-child(2){border-right:none;}.stat-cell:nth-child(3){border-top:1px solid var(--g200);border-right:1px solid var(--g200);}.stat-cell:nth-child(4){border-top:1px solid var(--g200);}}
+    .stat-n{font-size:40px;font-weight:800;color:var(--txt);letter-spacing:-0.05em;}
+    .stat-n em{color:var(--purple);font-style:normal;}
+    .stat-l{font-size:12px;color:var(--txtm);margin-top:6px;font-weight:500;}
+
+    /* ════════════════════════════════════
+       PROBLEM
+    ════════════════════════════════════ */
+    .problem{background:var(--navy);padding:160px 0 0;}
+    .problem-header{display:grid;grid-template-columns:1fr;gap:48px;margin-bottom:96px;}
+    @media(min-width:1024px){.problem-header{grid-template-columns:1fr 1fr;align-items:end;}}
+    .overline{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple-mu);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+    .overline::before{content:'';width:28px;height:1px;background:var(--purple);}
+    h2.sec-title{font-size:clamp(2.2rem,3.8vw,3.4rem);font-weight:800;line-height:1.06;letter-spacing:-0.03em;color:white;}
+    h2.sec-title span{color:var(--purple-mu);}
+    h2.sec-title.dark{color:var(--txt);}
+    .sec-sub{font-size:18px;line-height:1.7;color:rgba(255,255,255,0.3);}
+    .sec-sub.dark{color:var(--txts);}
+
+    .problem-grid{display:grid;grid-template-columns:repeat(3,1fr);background:rgba(255,255,255,0.03);border-top:1px solid rgba(255,255,255,0.04);}
+    @media(max-width:768px){.problem-grid{grid-template-columns:1fr;}}
+    .prob-item{padding:64px 48px;border-right:1px solid rgba(255,255,255,0.04);position:relative;transition:background 0.4s;}
+    @media(max-width:768px){.prob-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.04);}}
+    .prob-item:last-child{border-right:none;}
+    .prob-item::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--purple);transform:scaleX(0);transition:transform 0.4s;}
+    .prob-item:hover::after{transform:scaleX(1);}
+    .prob-item:hover{background:rgba(98,81,218,0.04);}
+    .prob-n{font-size:80px;font-weight:800;color:rgba(255,255,255,0.04);line-height:1;letter-spacing:-0.06em;margin-bottom:28px;}
+    .prob-item h3{font-size:20px;font-weight:700;color:white;margin-bottom:12px;}
+    .prob-item p{font-size:15px;color:rgba(255,255,255,0.3);line-height:1.7;}
+
+    /* ════════════════════════════════════
+       IMPACT IMAGE — Full bleed
+    ════════════════════════════════════ */
+    .impact-section{position:relative;height:700px;display:flex;align-items:center;overflow:hidden;}
+    .impact-img-bg{
+      position:absolute;inset:0;
+      background:linear-gradient(120deg,var(--navy-95) 0%,var(--navy-80) 50%,var(--navy-90) 100%);
+    }
+    /* Placeholder texture — will be replaced with real image */
+    .impact-img-bg::after{
+      content:'';position:absolute;inset:0;
+      background:repeating-linear-gradient(45deg,rgba(255,255,255,0.01) 0px,rgba(255,255,255,0.01) 1px,transparent 1px,transparent 40px);
+    }
+    .impact-gradient{position:absolute;inset:0;background:linear-gradient(90deg,var(--navy) 30%,rgba(9,15,28,0.15) 75%,rgba(9,15,28,0.8) 100%);}
+    .impact-content{position:relative;z-index:2;max-width:580px;padding:0;}
+    .impact-content .overline{color:var(--purple-mu);}
+    .impact-content h2{font-size:clamp(2.4rem,4vw,3.6rem);font-weight:800;line-height:1.04;letter-spacing:-0.04em;color:white;}
+    .impact-content p{font-size:17px;color:rgba(255,255,255,0.3);line-height:1.75;margin-top:24px;max-width:460px;}
+    .impact-link{display:inline-flex;align-items:center;gap:8px;margin-top:36px;font-size:14px;font-weight:700;color:var(--purple-mu);transition:gap 0.3s;}
+    .impact-link:hover{gap:14px;}
+    .impact-link svg{width:16px;height:16px;}
+    .impact-ph-label{position:absolute;bottom:24px;right:32px;z-index:3;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.06);padding:6px 14px;}
+
+    /* ════════════════════════════════════
+       SOLUTIONS
+    ════════════════════════════════════ */
+    .solutions{padding:160px 0;}
+    .sol-head{display:grid;grid-template-columns:1fr;gap:48px;margin-bottom:80px;}
+    @media(min-width:1024px){.sol-head{grid-template-columns:1fr 1fr;align-items:end;}}
+
+    /* Banner hero solution */
+    .sol-hero{
+      display:grid;grid-template-columns:1fr;
+      background:var(--navy);
+      position:relative;overflow:hidden;
+    }
+    @media(min-width:768px){.sol-hero{grid-template-columns:1fr 1fr;min-height:480px;}}
+    .sol-hero-text{padding:72px 64px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
+    .sol-hero-text .overline{color:var(--purple-mu);}
+    .sol-hero-text h3{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;color:white;line-height:1.1;letter-spacing:-0.03em;margin-bottom:16px;}
+    .sol-hero-text p{font-size:16px;color:rgba(255,255,255,0.32);line-height:1.7;}
+    .sol-hero-text .btn-p{align-self:flex-start;margin-top:36px;}
+    .sol-hero-img{min-height:320px;background:var(--navy-70);display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,0.08);font-weight:700;border-left:1px solid rgba(255,255,255,0.04);letter-spacing:0.05em;text-transform:uppercase;position:relative;}
+    .sol-hero-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 60% 40%,rgba(98,81,218,0.08),transparent 70%);}
+
+    /* List solutions */
+    .sol-list{margin-top:2px;}
+    .sol-row{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--g200);transition:background 0.25s;cursor:pointer;position:relative;}
+    @media(min-width:768px){.sol-row{grid-template-columns:240px 1fr 60px;align-items:center;}}
+    .sol-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--purple);transform:scaleY(0);transition:transform 0.3s;}
+    .sol-row:hover::before{transform:scaleY(1);}
+    .sol-row:hover{background:white;}
+    .sol-row:first-child{border-top:1px solid var(--g200);}
+    .sol-name{padding:32px 40px;font-size:19px;font-weight:700;color:var(--txt);}
+    .sol-desc{padding:8px 40px 32px;font-size:14px;color:var(--txtm);line-height:1.65;}
+    @media(min-width:768px){.sol-desc{padding:32px 40px;}}
+    .sol-arr{padding:0 32px 32px;color:var(--g300);transition:all 0.3s;}
+    @media(min-width:768px){.sol-arr{padding:32px;}}
+    .sol-row:hover .sol-arr{color:var(--purple);transform:translateX(5px);}
+
+    /* ════════════════════════════════════
+       HOW IT WORKS
+    ════════════════════════════════════ */
+    .how{background:white;padding:160px 0;}
+    .how-head{display:grid;grid-template-columns:1fr;gap:48px;margin-bottom:100px;}
+    @media(min-width:1024px){.how-head{grid-template-columns:1fr 1fr;align-items:end;}}
+    .how-layout{display:grid;grid-template-columns:1fr;gap:80px;}
+    @media(min-width:1024px){.how-layout{grid-template-columns:1fr 1fr;align-items:start;}}
+    .how-steps{display:flex;flex-direction:column;}
+    .how-step{display:flex;gap:28px;padding:40px 0;border-bottom:1px solid var(--g200);}
+    .how-step:last-child{border-bottom:none;}
+    .how-num{width:52px;height:52px;border:2px solid var(--purple);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--purple);flex-shrink:0;letter-spacing:-0.02em;}
+    .how-step h3{font-size:18px;font-weight:700;color:var(--txt);margin-bottom:8px;}
+    .how-step p{font-size:14px;color:var(--txtm);line-height:1.65;}
+    .how-visual{background:var(--navy);position:relative;overflow:hidden;min-height:540px;display:flex;align-items:center;justify-content:center;}
+    .how-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(98,81,218,0.08),transparent 65%);}
+    .how-visual-ph{position:relative;z-index:2;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.04);padding:16px 32px;}
+
+    /* ════════════════════════════════════
+       FULL-BLEED IMAGE — Regulação context
+    ════════════════════════════════════ */
+    .reg-impact{position:relative;height:560px;display:flex;align-items:center;overflow:hidden;background:var(--navy);}
+    .reg-impact-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--navy-95) 0%,var(--navy-80) 100%);}
+    .reg-impact-bg::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,0.008) 0px,rgba(255,255,255,0.008) 1px,transparent 1px,transparent 60px);}
+    .reg-impact-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,15,28,0.15) 0%,var(--navy) 55%);}
+    .reg-impact-content{position:relative;z-index:2;margin-left:auto;max-width:560px;padding:0;}
+    .reg-impact-content .overline{color:var(--purple-mu);}
+    .reg-impact-content h2{font-size:clamp(2rem,3.5vw,3rem);font-weight:800;color:white;letter-spacing:-0.03em;line-height:1.08;}
+    .reg-items{margin-top:40px;display:flex;flex-direction:column;}
+    .reg-item{display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+    .reg-item:last-child{border-bottom:none;}
+    .reg-badge{width:42px;height:42px;background:rgba(98,81,218,0.1);border:1px solid rgba(98,81,218,0.15);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:var(--purple-mu);letter-spacing:0.06em;flex-shrink:0;}
+    .reg-item h4{font-size:14px;font-weight:700;color:white;}
+    .reg-item p{font-size:12px;color:rgba(255,255,255,0.25);margin-top:2px;}
+    .reg-ph-label{position:absolute;bottom:24px;left:32px;z-index:3;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.06);padding:6px 14px;}
+
+    /* ════════════════════════════════════
+       TEAM
+    ════════════════════════════════════ */
+    .team{background:white;padding:160px 0;}
+    .team-head{margin-bottom:80px;}
+    .team-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--g200);}
+    @media(max-width:768px){.team-grid{grid-template-columns:repeat(2,1fr);}}
+    .team-m{padding:56px 32px;text-align:center;border-right:1px solid var(--g200);transition:background 0.3s;}
+    .team-m:last-child{border-right:none;}
+    @media(max-width:768px){.team-m:nth-child(2){border-right:none;}.team-m:nth-child(3),.team-m:nth-child(4){border-top:1px solid var(--g200);}.team-m:nth-child(3){border-right:1px solid var(--g200);}}
+    .team-m:hover{background:var(--sand);}
+    .team-photo{width:96px;height:96px;background:var(--g100);margin:0 auto 24px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:var(--g300);}
+    .team-m:hover .team-photo{background:var(--purple-li);color:var(--purple);}
+    .team-m h3{font-size:15px;font-weight:700;color:var(--txt);}
+    .team-role{font-size:12px;font-weight:700;color:var(--purple);margin-top:3px;}
+    .team-desc{font-size:12px;color:var(--txtm);margin-top:5px;line-height:1.5;}
+
+    /* ════════════════════════════════════
+       BLOG
+    ════════════════════════════════════ */
+    .blog{padding:160px 0;}
+    .blog-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px;flex-wrap:wrap;gap:16px;}
+    .blog-more{font-size:13px;font-weight:700;color:var(--purple);display:flex;align-items:center;gap:6px;transition:gap 0.3s;}
+    .blog-more:hover{gap:10px;}
+    .blog-more svg{width:14px;height:14px;}
+    .blog-layout{display:grid;grid-template-columns:1fr;gap:2px;}
+    @media(min-width:768px){.blog-layout{grid-template-columns:1.4fr 1fr;}}
+    .blog-big{background:var(--navy);padding:56px;min-height:460px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;transition:opacity 0.3s;}
+    .blog-big:hover{opacity:0.9;}
+    .blog-big::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 20%,rgba(98,81,218,0.08),transparent 60%);}
+    .blog-big .tag{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple-mu);margin-bottom:16px;position:relative;}
+    .blog-big h3{font-size:26px;font-weight:800;color:white;line-height:1.15;letter-spacing:-0.02em;position:relative;}
+    .blog-big .meta{font-size:12px;color:rgba(255,255,255,0.2);margin-top:12px;position:relative;}
+    .blog-stack{display:flex;flex-direction:column;gap:2px;}
+    .blog-item{background:white;padding:36px 40px;display:flex;gap:20px;align-items:flex-start;border-left:3px solid transparent;transition:all 0.25s;}
+    .blog-item:hover{background:var(--sand);border-left-color:var(--purple);}
+    .blog-ico{width:52px;height:52px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:white;}
+    .blog-item .tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--purple);}
+    .blog-item h3{font-size:15px;font-weight:700;color:var(--txt);line-height:1.38;margin-top:4px;}
+    .blog-item .meta{font-size:12px;color:var(--txtm);margin-top:6px;}
+
+    /* ════════════════════════════════════
+       CTA
+    ════════════════════════════════════ */
+    .cta{padding:80px 0 120px;}
+    .cta-box{background:var(--navy);position:relative;overflow:hidden;}
+    .cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 800px 600px at 20% 50%,rgba(98,81,218,0.07),transparent);}
+    .cta-layout{display:grid;grid-template-columns:1fr;position:relative;}
+    @media(min-width:1024px){.cta-layout{grid-template-columns:1fr 1fr;}}
+    .cta-l{padding:80px 72px;display:flex;flex-direction:column;justify-content:center;}
+    .cta-l h2{font-size:clamp(2rem,3vw,2.6rem);font-weight:800;color:white;line-height:1.06;letter-spacing:-0.03em;}
+    .cta-l p{font-size:17px;color:rgba(255,255,255,0.28);line-height:1.75;margin-top:16px;}
+    .cta-btns{margin-top:36px;display:flex;flex-wrap:wrap;gap:12px;}
+    .cta-r{padding:64px;background:rgba(255,255,255,0.02);border-left:1px solid rgba(255,255,255,0.03);}
+    @media(max-width:1023px){.cta-l,.cta-r{padding:56px;}}
+    .cta-r h3{font-size:20px;font-weight:700;color:white;margin-bottom:36px;}
+    .fg{margin-bottom:20px;}
+    .fl{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.15);margin-bottom:8px;}
+    .fi{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);padding:14px 20px;font-size:14px;color:white;font-family:inherit;outline:none;transition:border 0.2s;}
+    .fi::placeholder{color:rgba(255,255,255,0.1);}
+    .fi:focus{border-color:rgba(98,81,218,0.5);}
+    select.fi{appearance:none;background-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>');background-repeat:no-repeat;background-position:right 16px center;}
+    .fs{width:100%;background:var(--purple);color:white;font-size:14px;font-weight:700;padding:16px;border:none;cursor:pointer;font-family:inherit;transition:all 0.3s;margin-top:8px;letter-spacing:-0.01em;}
+    .fs:hover{background:var(--purple-dk);}
+
+    /* ════════════════════════════════════
+       FOOTER — Powerful
+    ════════════════════════════════════ */
+    .footer{background:var(--navy);color:white;}
+
+    /* Top band */
+    .footer-top{border-bottom:1px solid rgba(255,255,255,0.05);padding:72px 0;}
+    .footer-top-layout{display:grid;grid-template-columns:1fr;gap:64px;}
+    @media(min-width:1024px){.footer-top-layout{grid-template-columns:1.8fr 1fr 1fr 1fr;gap:48px;}}
+
+    .footer-brand{}
+    .footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+    .footer-logo .m{width:28px;height:28px;background:var(--purple);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:12px;}
+    .footer-logo span{font-weight:700;font-size:17px;}
+    .footer-brand p{font-size:14px;color:rgba(255,255,255,0.22);line-height:1.7;max-width:280px;}
+    .footer-brand-contact{margin-top:24px;display:flex;flex-direction:column;gap:8px;}
+    .footer-brand-contact a{font-size:13px;color:rgba(255,255,255,0.25);transition:color 0.2s;display:flex;align-items:center;gap:6px;}
+    .footer-brand-contact a:hover{color:var(--purple-mu);}
+    .footer-brand-contact a svg{width:14px;height:14px;}
+
+    .footer-col h4{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.04);}
+    .footer-col nav{display:flex;flex-direction:column;gap:1px;}
+    .footer-col nav a{font-size:13px;color:rgba(255,255,255,0.22);padding:6px 0;transition:color 0.2s;display:flex;align-items:center;justify-content:space-between;}
+    .footer-col nav a:hover{color:rgba(255,255,255,0.6);}
+    .footer-col nav a .badge{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--purple-mu);background:rgba(98,81,218,0.12);padding:2px 7px;}
+
+    /* Newsletter strip */
+    .footer-newsletter{border-bottom:1px solid rgba(255,255,255,0.05);padding:40px 0;}
+    .footer-newsletter-layout{display:grid;grid-template-columns:1fr;gap:24px;align-items:center;}
+    @media(min-width:768px){.footer-newsletter-layout{grid-template-columns:1fr auto;}}
+    .footer-newsletter h4{font-size:16px;font-weight:700;color:white;}
+    .footer-newsletter p{font-size:13px;color:rgba(255,255,255,0.25);margin-top:4px;}
+    .footer-newsletter-form{display:flex;gap:0;}
+    .footer-newsletter-form input{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-right:none;padding:13px 20px;font-size:13px;color:white;font-family:inherit;outline:none;width:280px;}
+    .footer-newsletter-form input::placeholder{color:rgba(255,255,255,0.15);}
+    .footer-newsletter-form button{background:var(--purple);color:white;border:none;padding:13px 24px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background 0.3s;}
+    .footer-newsletter-form button:hover{background:var(--purple-dk);}
+
+    /* Trust bar */
+    .footer-trust{border-bottom:1px solid rgba(255,255,255,0.04);padding:28px 0;}
+    .footer-trust-layout{display:flex;align-items:center;gap:32px;flex-wrap:wrap;}
+    .footer-trust-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.12);}
+    .footer-trust-badges{display:flex;gap:12px;flex-wrap:wrap;}
+    .f-badge{font-size:11px;font-weight:700;color:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.06);padding:6px 14px;display:flex;align-items:center;gap:6px;}
+    .f-badge svg{width:12px;height:12px;color:rgba(98,81,218,0.5);}
+
+    /* Bottom bar */
+    .footer-bottom{padding:24px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+    .footer-bottom-left{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+    .footer-bottom-left span{font-size:12px;color:rgba(255,255,255,0.12);}
+    .footer-bottom-left a{font-size:12px;color:rgba(255,255,255,0.15);transition:color 0.2s;}
+    .footer-bottom-left a:hover{color:rgba(255,255,255,0.4);}
+    .footer-socials{display:flex;gap:8px;}
+    .footer-social{width:36px;height:36px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.2);transition:all 0.2s;}
+    .footer-social:hover{background:rgba(98,81,218,0.15);color:var(--purple-mu);border-color:rgba(98,81,218,0.2);}
+    .footer-social svg{width:16px;height:16px;}
+
+    /* ════════ SCROLL REVEAL ════════ */
+    .r{opacity:0;transform:translateY(36px);transition:opacity 0.75s cubic-bezier(0.16,1,0.3,1),transform 0.75s cubic-bezier(0.16,1,0.3,1);}
+    .r.v{opacity:1;transform:translateY(0);}
+    .r1{transition-delay:0.08s;}.r2{transition-delay:0.16s;}.r3{transition-delay:0.24s;}
+  </style>
+</head>
+<body>
+
+<!-- ════ HEADER ════ -->
+<header class="hdr" id="hdr">
+  <div class="hdr-bar" id="hdr-bar">
+    <span>Novo: Integração com DREX (Real Digital) disponível —</span>
+    <a href="#contato">Saiba mais <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+    <button class="hdr-bar-close" onclick="document.getElementById('hdr-bar').classList.add('hidden')" aria-label="fechar">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="wrap">
+    <div class="hdr-main">
+      <a href="#home" class="logo"><div class="logo-mark">V</div><span class="logo-text">vetrii</span></a>
+
+      <div class="nav-items" id="nav-items">
+        <!-- Soluções -->
+        <div class="nav-item" data-menu="sol">
+          <button class="nav-link">Soluções <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg></button>
+          <div class="mega mega-sol">
+            <div class="mega-sol-inner">
+              <div class="mega-sol-sidebar">
+                <div class="mega-sol-sidebar-title">Por segmento</div>
+                <a href="#solucoes" class="mega-sol-link"><span class="dot"></span>Montadoras</a>
+                <a href="#solucoes" class="mega-sol-link"><span class="dot"></span>Concessionárias</a>
+                <a href="#solucoes" class="mega-sol-link"><span class="dot"></span>Bancos e financeiras</a>
+                <a href="#solucoes" class="mega-sol-link"><span class="dot"></span>Seguradoras</a>
+                <a href="#solucoes" class="mega-sol-link"><span class="dot"></span>Governo</a>
+                <a href="#solucoes" class="mega-sol-link"><span class="dot"></span>Proprietários</a>
+              </div>
+              <div class="mega-sol-content">
+                <div class="mega-sol-featured">
+                  <a href="#solucoes" class="mega-sol-card">
+                    <div class="mega-sol-icon"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                    <div><h4>Passaporte Veicular Digital</h4><p>Registro imutável do ciclo de vida completo do veículo</p></div>
+                  </a>
+                  <a href="#como-funciona" class="mega-sol-card">
+                    <div class="mega-sol-icon"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg></div>
+                    <div><h4>Rastreabilidade de componentes</h4><p>Do primeiro parafuso ao descarte responsável</p></div>
+                  </a>
+                  <a href="#contato" class="mega-sol-card">
+                    <div class="mega-sol-icon"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15"/></svg></div>
+                    <div><h4>Financiamento inteligente</h4><p>Garantias verificáveis e integração DREX</p></div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="mega-sol-footer">
+              <span>6 segmentos atendidos</span>
+              <a href="#solucoes">Ver todas as soluções <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recursos -->
+        <div class="nav-item" data-menu="res">
+          <button class="nav-link">Recursos <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg></button>
+          <div class="mega mega-res">
+            <div class="mega-res-inner">
+              <div class="mega-res-col">
+                <div class="mega-res-title">Aprenda</div>
+                <a href="#blog" class="mega-res-item"><div class="mega-res-ico"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg></div><div><h4>Blog e artigos</h4><p>Insights e análises do setor automotivo</p></div></a>
+                <a href="#" class="mega-res-item"><div class="mega-res-ico"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg></div><div><h4>Webinars e eventos</h4><p>Conteúdo ao vivo com especialistas do mercado</p></div></a>
+                <a href="#" class="mega-res-item"><div class="mega-res-ico"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg></div><div><h4>Whitepapers</h4><p>Estudos técnicos sobre regulação e mercado</p></div></a>
+              </div>
+              <div class="mega-res-col">
+                <div class="mega-res-title">Desenvolvedores</div>
+                <a href="#" class="mega-res-item"><div class="mega-res-ico"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg></div><div><h4>Documentação da API <span class="mega-res-badge">v2.1</span></h4><p>Referência completa para integração</p></div></a>
+                <a href="#" class="mega-res-item"><div class="mega-res-ico"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182"/></svg></div><div><h4>Changelog <span class="mega-res-badge">Novo</span></h4><p>Atualizações e novidades da plataforma</p></div></a>
+                <a href="#" class="mega-res-item"><div class="mega-res-ico"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"/></svg></div><div><h4>SDKs e exemplos</h4><p>Bibliotecas para Node, Python e Java</p></div></a>
+              </div>
+            </div>
+            <div class="mega-res-footer">
+              <a href="#">Status da plataforma <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+              <a href="#">Suporte técnico <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+              <a href="#">Central de ajuda <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empresa -->
+        <div class="nav-item" data-menu="emp">
+          <button class="nav-link">Empresa <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg></button>
+          <div class="mega mega-emp">
+            <div class="mega-emp-inner">
+              <div class="mega-emp-grid">
+                <a href="#sobre" class="mega-emp-link"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21"/></svg><span>Sobre nós</span></a>
+                <a href="#" class="mega-emp-link"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253"/></svg><span>Imprensa</span></a>
+                <a href="#" class="mega-emp-link"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0"/></svg><span>Carreiras</span></a>
+                <a href="#" class="mega-emp-link"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg><span>Contato</span></a>
+              </div>
+              <div class="mega-emp-highlight">
+                <div class="mega-emp-highlight-icon"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg></div>
+                <div class="mega-emp-highlight-text"><h4>Seja um parceiro Vetrii</h4><p>Conecte sua plataforma à infraestrutura de passaportes digitais.</p><a href="#contato">Falar com a equipe <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#como-funciona" class="nav-link" style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);padding:8px 16px;transition:color 0.2s;cursor:pointer;display:block;">Como funciona</a>
+        <a href="#blog" class="nav-link" style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);padding:8px 16px;transition:color 0.2s;cursor:pointer;display:block;">Blog</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="#" class="btn-login">Acessar plataforma</a>
+        <a href="#contato" class="btn-demo">Agendar demo</a>
+      </div>
+      <button class="mob-btn" id="mob-btn"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mob-panel" id="mob-panel">
+      <a href="#home">Home</a><a href="#solucoes">Soluções</a><a href="#como-funciona">Como funciona</a><a href="#sobre">Empresa</a><a href="#blog">Blog</a><a href="#">Documentação</a>
+      <a href="#contato" class="mob-demo">Agendar demonstração</a>
+    </div>
+  </div>
+</header>
+
+<!-- ════ HERO ════ -->
+<section class="hero" id="home">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="assets/videos/bg.mp4" type="video/mp4">
+  </video>
+  <div class="hero-video-overlay"></div>
+  <div class="hero-glow"></div><div class="hero-glow2"></div><div class="hero-lines"></div>
+  <div class="wrap hero-content">
+    <div class="hero-layout">
+      <div>
+        <div class="hero-eyebrow r v"><div class="hero-eyebrow-line"></div><span>Passaporte Veicular Digital</span></div>
+        <h1 class="r v r1">Onde o carro conta<br>a sua <em>própria<br>história.</em></h1>
+        <p class="hero-body r v r2">Cada chassi gera um registro digital único — reunindo montadoras, bancos, seguradoras e o poder público em uma <strong>única fonte de verdade imutável</strong>.</p>
+        <div class="hero-actions r v r3">
+          <a href="#contato" class="btn-p">Agendar demonstração <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+          <a href="#solucoes" class="btn-g">Ver soluções por segmento</a>
+        </div>
+        <div class="hero-trust r v r3">
+          <span>Conformidade com</span>
+          <div class="trust-pills">
+            <div class="trust-pill">LGPD</div>
+            <div class="trust-pill">SENATRAN</div>
+            <div class="trust-pill">DREX</div>
+            <div class="trust-pill">ESG</div>
+          </div>
+        </div>
+      </div>
+      <div class="passport r v r2" id="psp">
+        <div class="psp">
+          <div class="psp-head"><div class="psp-brand"><div class="m">V</div><div><span class="t">Passaporte Digital</span><span class="s">#VTR-2026-0847A</span></div></div><div class="psp-status">Verificado</div></div>
+          <div class="psp-body">
+            <div class="psp-row full"><div class="psp-cell"><div class="psp-lbl">Veículo</div><div class="psp-val">Toyota Corolla Cross XRE</div><div class="psp-sub">2024 · 28.430 km · Prata Lunar</div></div></div>
+            <div class="psp-row"><div class="psp-cell"><div class="psp-lbl">Proprietário</div><div class="psp-val">2.o dono</div><div class="psp-sub">Desde mar/2025</div></div><div class="psp-cell"><div class="psp-lbl">Manutenções</div><div class="psp-val">4 registros</div><div class="psp-sub">Última: jan/2026</div></div></div>
+            <div class="psp-row full"><div class="psp-cell"><div class="psp-lbl">Ciclo de vida</div><div class="psp-bar"><span style="background:rgba(98,81,218,0.65)"></span><span style="background:rgba(98,81,218,0.4)"></span><span style="background:rgba(98,81,218,0.2)"></span><span style="background:rgba(255,255,255,0.04)"></span></div></div></div>
+          </div>
+          <div class="psp-footer"><span>Blockchain · LGPD</span><a href="#">Ver histórico completo <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ STATS ════ -->
+<section class="stats">
+  <div class="wrap"><div class="stats-grid r v">
+    <div class="stat-cell"><div class="stat-n">45M<em>+</em></div><div class="stat-l">veículos ativos no Brasil</div></div>
+    <div class="stat-cell"><div class="stat-n">R$3,5B</div><div class="stat-l">perdas anuais com fraude</div></div>
+    <div class="stat-cell"><div class="stat-n">70<em>%</em></div><div class="stat-l">sem histórico confiável</div></div>
+    <div class="stat-cell"><div class="stat-n">12<span style="font-size:20px;color:var(--g400);font-weight:500"> dias</span></div><div class="stat-l">média para transferência</div></div>
+  </div></div>
+</section>
+
+<!-- ════ PROBLEM ════ -->
+<section class="problem" id="problema">
+  <div class="wrap"><div class="problem-header r">
+    <div><div class="overline" style="color:var(--purple-mu)">O problema</div><h2 class="sec-title">O mercado opera<br><span>às cegas.</span></h2></div>
+    <div><p class="sec-sub">Dados fragmentados, históricos adulterados e processos manuais custam bilhões ao setor — e corroem a confiança de toda a cadeia automotiva.</p></div>
+  </div></div>
+  <div class="problem-grid r r1">
+    <div class="prob-item"><div class="prob-n">01</div><h3>Fraude e adulteração</h3><p>Quilometragem adulterada, histórico forjado e sinistros ocultados. O comprador paga o preço da desconfiança.</p></div>
+    <div class="prob-item"><div class="prob-n">02</div><h3>Dados fragmentados</h3><p>Montadora, concessionária, seguradora e DETRAN — cada um com seu sistema. Zero fonte única de verdade.</p></div>
+    <div class="prob-item"><div class="prob-n">03</div><h3>Burocracia extrema</h3><p>Transferência, vistoria e financiamento. Processos manuais que demoram dias e custam caro para todos.</p></div>
+  </div>
+</section>
+
+<!-- ════ IMPACT IMAGE 1 ════ -->
+<section class="impact-section">
+  <div class="impact-img-bg"></div>
+  <div class="impact-gradient"></div>
+  <div class="wrap"><div class="impact-content r">
+    <div class="overline">Por que a Vetrii</div>
+    <h2>A infraestrutura que faltava para o setor automotivo.</h2>
+    <p>Não é mais uma plataforma. É o sistema end-to-end que conecta toda a cadeia — com dados imutáveis, compliance nativo e integração com o Real Digital.</p>
+    <a href="#como-funciona" class="impact-link">Ver como funciona <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+  </div></div>
+  <div class="impact-ph-label">Placeholder → imagem: veículo / tecnologia</div>
+</section>
+
+<!-- ════ SOLUTIONS ════ -->
+<section class="solutions" id="solucoes">
+  <div class="wrap"><div class="sol-head r">
+    <div><div class="overline">Soluções por segmento</div><h2 class="sec-title dark">Cada decisor<br>encontra o que precisa.</h2></div>
+    <p class="sec-sub dark">Montadoras, bancos, seguradoras — cada um com suas dores. A Vetrii entrega valor específico para quem assina o cheque.</p>
+  </div></div>
+  <div class="r r1">
+    <div class="sol-hero">
+      <div class="sol-hero-text"><div class="overline">Destaque — Montadoras</div><h3>Rastreabilidade do primeiro parafuso ao recall.</h3><p>Garantias tokenizadas, dados de componentes e histórico imutável que reduzem custos operacionais e abrem novas receitas.</p><a href="#contato" class="btn-p">Falar com especialista <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a></div>
+      <div class="sol-hero-img">Placeholder: imagem montadora / linha de produção</div>
+    </div>
+  </div>
+  <div class="wrap r r2"><div class="sol-list">
+    <a href="#contato" class="sol-row"><div class="sol-name">Concessionárias</div><div class="sol-desc">Seminovos com histórico verificável. Transparência que gera confiança e aumenta o ticket médio nas negociações.</div><div class="sol-arr"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/></svg></div></a>
+    <a href="#contato" class="sol-row"><div class="sol-name">Bancos e financeiras</div><div class="sol-desc">Financiamento mais rápido com garantias verificáveis. Integração nativa com DREX e contratos inteligentes.</div><div class="sol-arr"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/></svg></div></a>
+    <a href="#contato" class="sol-row"><div class="sol-name">Seguradoras</div><div class="sol-desc">Precificação de risco com dados reais. Histórico imutável que elimina fraudes em sinistros e reduz perdas operacionais.</div><div class="sol-arr"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/></svg></div></a>
+    <a href="#contato" class="sol-row"><div class="sol-name">Governo e proprietários</div><div class="sol-desc">Transferências digitais, desburocratização e passaporte do veículo que valoriza na revenda e reduz o custo do seguro.</div><div class="sol-arr"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/></svg></div></a>
+  </div></div>
+</section>
+
+<!-- ════ HOW IT WORKS ════ -->
+<section class="how" id="como-funciona">
+  <div class="wrap">
+    <div class="how-head r"><div><div class="overline">Como funciona</div><h2 class="sec-title dark">Da fabricação ao descarte.<br>Tudo registrado.</h2></div><p class="sec-sub dark">Quatro etapas que transformam dados dispersos em um registro único, verificável por qualquer parte da cadeia.</p></div>
+    <div class="how-layout r r1">
+      <div class="how-steps">
+        <div class="how-step"><div class="how-num">01</div><div><h3>Registro digital</h3><p>O veículo recebe um identificador digital único no momento da fabricação — seu passaporte na blockchain.</p></div></div>
+        <div class="how-step"><div class="how-num">02</div><div><h3>Rastreabilidade contínua</h3><p>Manutenções, trocas de peça e transferências de proprietário. Cada evento registrado de forma imutável.</p></div></div>
+        <div class="how-step"><div class="how-num">03</div><div><h3>Verificação por qualquer parte</h3><p>Compradores, bancos e seguradoras consultam o histórico completo sem intermediários e sem dúvidas.</p></div></div>
+        <div class="how-step"><div class="how-num">04</div><div><h3>Circularidade e descarte</h3><p>Remanufatura, reciclagem ou descarte responsável. O ciclo completo do veículo, documentado até o fim.</p></div></div>
+      </div>
+      <div class="how-visual"><div class="how-visual-ph">Placeholder: diagrama / infográfico do processo</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ REGULATION IMPACT ════ -->
+<section class="reg-impact">
+  <div class="reg-impact-bg"></div>
+  <div class="reg-impact-overlay"></div>
+  <div class="wrap" style="width:100%;display:flex;justify-content:flex-end;">
+    <div class="reg-impact-content r">
+      <div class="overline">Contexto regulatório</div>
+      <h2>O mercado<br>já está pedindo.</h2>
+      <div class="reg-items r r1">
+        <div class="reg-item"><div class="reg-badge">SNT</div><div><h4>SENATRAN</h4><p>Digitalização de transferências veiculares. O passaporte digital é o próximo passo.</p></div></div>
+        <div class="reg-item"><div class="reg-badge">FEB</div><div><h4>FEBRABAN</h4><p>Pilotos do DREX em andamento. Garantias tokenizadas já no radar do setor.</p></div></div>
+        <div class="reg-item"><div class="reg-badge">SDP</div><div><h4>SINDIPEÇAS</h4><p>Exigências ESG de montadoras globais impulsionam rastreabilidade de componentes.</p></div></div>
+        <div class="reg-item"><div class="reg-badge">ESG</div><div><h4>Agenda ESG global</h4><p>Montadoras europeias já exigem passaporte digital. O Brasil está chegando lá.</p></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="reg-ph-label">Placeholder → imagem: contexto regulatório / sede institucional</div>
+</section>
+
+<!-- ════ TEAM ════ -->
+<section class="team" id="sobre">
+  <div class="wrap"><div class="team-head r"><div class="overline">Empresa</div><h2 class="sec-title dark">Quem está construindo.</h2><p class="sec-sub dark" style="max-width:520px;margin-top:12px;">80+ anos de experiência combinada em tecnologia, finanças e mercado automotivo.</p></div>
+  <div class="team-grid r r1">
+    <div class="team-m"><div class="team-photo">FF</div><h3>Fabiano Falvo</h3><div class="team-role">CEO</div><div class="team-desc">Engenheiro eletrônico, 25+ anos em sistemas digitais</div></div>
+    <div class="team-m"><div class="team-photo">RG</div><h3>Roberto Galvão</h3><div class="team-role">CFO</div><div class="team-desc">19 anos no setor automotivo e fintech</div></div>
+    <div class="team-m"><div class="team-photo">TC</div><h3>Tathiana Canan</h3><div class="team-role">COO</div><div class="team-desc">Conselheira IBGC · Formação INSEAD</div></div>
+    <div class="team-m"><div class="team-photo">AG</div><h3>André Giroldo</h3><div class="team-role">CPO</div><div class="team-desc">15 anos em produto, web3 e blockchain</div></div>
+  </div></div>
+</section>
+
+<!-- ════ BLOG ════ -->
+<section class="blog" id="blog">
+  <div class="wrap">
+    <div class="blog-head r"><div><div class="overline">Blog</div><h2 class="sec-title dark">Insights do setor</h2></div><a href="#" class="blog-more">Ver todos <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a></div>
+    <div class="blog-layout r r1">
+      <a href="#" class="blog-big"><div class="tag">Mercado</div><h3>O que é um passaporte digital veicular e por que o Brasil precisa dele</h3><div class="meta">5 min de leitura</div></a>
+      <div class="blog-stack">
+        <a href="#" class="blog-item"><div class="blog-ico" style="background:var(--purple);">02</div><div><div class="tag">Regulação</div><h3>Fraude em odômetro: como o histórico imutável protege compradores</h3><div class="meta">7 min</div></div></a>
+        <a href="#" class="blog-item"><div class="blog-ico" style="background:var(--navy);">03</div><div><div class="tag">ESG</div><h3>Por que montadoras europeias já exigem passaporte digital</h3><div class="meta">6 min</div></div></a>
+        <a href="#" class="blog-item"><div class="blog-ico" style="background:var(--navy-70);">04</div><div><div class="tag">Finanças</div><h3>DREX e o mercado automotivo: o que muda para bancos</h3><div class="meta">4 min</div></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CTA ════ -->
+<section class="cta" id="contato"><div class="wrap r"><div class="cta-box"><div class="cta-layout">
+  <div class="cta-l"><div class="overline" style="color:var(--purple-mu)">Fale conosco</div><h2>Pronto para modernizar seu negócio?</h2><p>Converse com nossa equipe e descubra como o passaporte veicular digital transforma sua operação.</p><div class="cta-btns"><a href="#" class="btn-p">Fale com a equipe <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a><a href="#" class="btn-g">Baixar apresentação</a></div></div>
+  <div class="cta-r"><h3>Agendar demonstração</h3><form><div class="fg"><label class="fl">Nome</label><input type="text" class="fi" placeholder="Seu nome completo"></div><div class="fg"><label class="fl">E-mail corporativo</label><input type="email" class="fi" placeholder="nome@empresa.com"></div><div class="fg"><label class="fl">Segmento</label><select class="fi"><option value="" disabled selected>Selecione</option><option>Montadora</option><option>Concessionária</option><option>Banco / Financeira</option><option>Seguradora</option><option>Governo</option><option>Outro</option></select></div><button type="submit" class="fs">Solicitar demonstração</button></form></div>
+</div></div></div></section>
+
+<!-- ════ FOOTER ════ -->
+<footer class="footer">
+  <!-- Newsletter -->
+  <div class="footer-newsletter"><div class="wrap"><div class="footer-newsletter-layout">
+    <div><h4>Fique por dentro do mercado automotivo digital</h4><p>Regulação, DREX, passaportes digitais e ESG — na sua caixa de entrada.</p></div>
+    <div class="footer-newsletter-form"><input type="email" placeholder="seu@email.com"><button>Assinar</button></div>
+  </div></div></div>
+
+  <!-- Trust -->
+  <div class="footer-trust"><div class="wrap"><div class="footer-trust-layout">
+    <span class="footer-trust-label">Conformidade</span>
+    <div class="footer-trust-badges">
+      <div class="f-badge"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>LGPD Compliant</div>
+      <div class="f-badge"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>Blockchain Verified</div>
+      <div class="f-badge"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75"/></svg>DREX Ready</div>
+      <div class="f-badge"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>ESG Aligned</div>
+    </div>
+  </div></div></div>
+
+  <!-- Main -->
+  <div class="footer-top"><div class="wrap"><div class="footer-top-layout">
+    <div class="footer-brand">
+      <div class="footer-logo"><div class="m">V</div><span>vetrii</span></div>
+      <p>Passaporte Veicular Digital — rastreabilidade do chassi ao descarte, conectando toda a cadeia automotiva brasileira.</p>
+      <div class="footer-brand-contact">
+        <a href="mailto:info@vetrii.com"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>info@vetrii.com</a>
+        <a href="#"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>São Paulo, Brasil</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Soluções</h4><nav><a href="#">Montadoras</a><a href="#">Concessionárias</a><a href="#">Bancos</a><a href="#">Seguradoras</a><a href="#">Governo</a><a href="#">Proprietários</a></nav></div>
+    <div class="footer-col"><h4>Recursos</h4><nav><a href="#">Documentação da API <span class="badge">v2.1</span></a><a href="#">Changelog <span class="badge">Novo</span></a><a href="#">SDKs</a><a href="#">Status</a><a href="#">Blog</a><a href="#">Webinars</a></nav></div>
+    <div class="footer-col"><h4>Empresa</h4><nav><a href="#sobre">Sobre nós</a><a href="#">Carreiras</a><a href="#">Imprensa</a><a href="#">Parcerias</a><a href="#contato">Contato</a><a href="#">Termos de uso</a><a href="#">Privacidade / LGPD</a></nav></div>
+  </div></div></div>
+
+  <!-- Bottom -->
+  <div class="wrap"><div class="footer-bottom">
+    <div class="footer-bottom-left"><span>&copy; 2026 Vetrii Tecnologia Ltda. Todos os direitos reservados.</span><a href="#">Termos</a><a href="#">Privacidade</a><a href="#">LGPD</a><a href="#">Cookies</a></div>
+    <div class="footer-socials">
+      <a href="#" class="footer-social" aria-label="LinkedIn"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg></a>
+      <a href="#" class="footer-social" aria-label="Instagram"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/></svg></a>
+      <a href="#" class="footer-social" aria-label="X / Twitter"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    </div>
+  </div></div>
+</footer>
+
+<script>
+  // Header scroll
+  const hdr=document.getElementById('hdr');
+  addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>20));
+
+  // Mega menus — click toggle on desktop
+  const navItems=document.querySelectorAll('.nav-item[data-menu]');
+  let activeItem=null;
+  navItems.forEach(item=>{
+    item.querySelector('.nav-link').addEventListener('click',e=>{
+      e.stopPropagation();
+      const isActive=item.classList.contains('active');
+      navItems.forEach(i=>i.classList.remove('active'));
+      if(!isActive){item.classList.add('active');activeItem=item;}
+      else activeItem=null;
+    });
+  });
+  document.addEventListener('click',()=>{navItems.forEach(i=>i.classList.remove('active'));activeItem=null;});
+
+  // Mobile menu
+  const mb=document.getElementById('mob-btn'),mp=document.getElementById('mob-panel');
+  mb.addEventListener('click',()=>{mb.classList.toggle('open');mp.classList.toggle('open');});
+  mp.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mb.classList.remove('open');mp.classList.remove('open');}));
+
+  // Passport visibility
+  const pp=document.getElementById('psp');
+  const setPP=()=>{if(pp)pp.style.display=innerWidth>=1024?'block':'none';};
+  setPP();addEventListener('resize',setPP);
+
+  // Scroll reveal
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')}),{threshold:0.06,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.r').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
