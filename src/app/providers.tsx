@@ -1,6 +1,6 @@
 'use client'
 
-import { ChakraProvider, createSystem, defineConfig, defaultSystem } from '@chakra-ui/react'
+import { ChakraProvider, createSystem, defineConfig, defaultConfig } from '@chakra-ui/react'
 import React from 'react'
 
 const customConfig = defineConfig({
@@ -16,7 +16,7 @@ const customConfig = defineConfig({
   }
 })
 
-const system = createSystem(defaultSystem, customConfig)
+const system = createSystem(defaultConfig, customConfig)
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return <ChakraProvider value={system}>{children}</ChakraProvider>
