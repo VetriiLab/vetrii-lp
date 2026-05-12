@@ -9,14 +9,14 @@ const meta: Record<string, { kpi: string; kpiLabel: string; tag: string }> = {
   'Bancos e financeiras': {
     kpi: '–60%',
     kpiLabel: 'tempo de aprovação de crédito',
-    tag: 'Crédito & DREX',
+    tag: 'Crédito',
   },
   'Seguradoras': {
     kpi: '–40%',
     kpiLabel: 'perdas com fraudes em sinistros',
     tag: 'Risco & Compliance',
   },
-  'Governo e proprietários': {
+  'Governo e reguladores': {
     kpi: '100%',
     kpiLabel: 'transferências digitais, sem papel',
     tag: 'Desburocratização',
@@ -50,8 +50,7 @@ export default function Solutions() {
             </h2>
           </div>
           <p className="sec-sub dark">
-            Montadoras, bancos, seguradoras — cada um com suas dores.
-            A Vetrii entrega valor específico para quem assina o cheque.
+            Se você representa uma montadora, concessionária, banco, seguradora ou pertence ao ecossistema de veículos, a Vetrii tem valor específico para o seu negócio.
           </p>
         </div>
       </div>
@@ -61,11 +60,9 @@ export default function Solutions() {
         <div className="sol-hero">
           <div className="sol-hero-text">
             <div className="overline">Destaque — Montadoras</div>
-            <h3>Rastreabilidade do primeiro parafuso ao recall.</h3>
+            <h3>Rastreabilidade, garantias tokenizadas e dados precisos.</h3>
             <p>
-              Garantias tokenizadas, dados de componentes e histórico imutável
-              que reduzem custos operacionais e abrem novas receitas — tudo em
-              conformidade com as exigências ESG globais.
+              Reduza custos operacionais e abra novas oportunidades com rastreabilidade do primeiro parafuso ao recall, em conformidade com as exigências ESG globais.
             </p>
             <a href="#contato" className="btn-p">
               Falar com especialista{' '}

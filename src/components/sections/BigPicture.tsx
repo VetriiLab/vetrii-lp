@@ -175,13 +175,12 @@ export default function BigPicture() {
       <div className="wrap">
         {/* Header */}
         <div className="bp-header r">
-          <div className="overline">Big Picture</div>
+          <div className="overline">Tecnologia Blockchain Aplicada a Veículos</div>
           <h2 className="sec-title dark">
             Da fabricação ao descarte.<br />Tudo registrado.
           </h2>
           <p className="bp-header__sub">
-            O Passaporte Veicular Digital conecta toda a cadeia automotiva — de montadoras a
-            seguradoras — em um único registro imutável. Quatro etapas que transformam dados dispersos em um registro único, verificável por qualquer parte da cadeia.
+            O Passaporte Veicular Digital conecta toda a cadeia automotiva em um único registro imutável. Quatro etapas que transformam dados dispersos em um token digital único, verificável por qualquer parte.
           </p>
         </div>
 

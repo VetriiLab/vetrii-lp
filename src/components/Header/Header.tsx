@@ -45,9 +45,9 @@ const PRODUCTS = [
   },
   {
     title: 'Financiamento Inteligente',
-    desc: 'Garantias verificáveis, scoring em tempo real e integração com DREX.',
-    metric: 'DREX',
-    metricLabel: 'ready',
+    desc: 'Garantias verificáveis e scoring em tempo real com contratos inteligentes em blockchain.',
+    metric: '–60%',
+    metricLabel: 'tempo de aprovação',
     icon: (
       <svg fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15" />
@@ -79,7 +79,6 @@ const DEV_ITEMS: { title: string; badge?: string; desc: string }[] = [
 const COMPANY_LINKS = [
   { label: 'Sobre nós', href: '#sobre', desc: 'Missão, visão e história da Vetrii' },
   { label: 'Imprensa', href: '#', desc: 'Releases, cobertura e kit de mídia' },
-  { label: 'Carreiras', href: '#', desc: 'Oportunidades para talentos excepcionais' },
   { label: 'Contato', href: '#contato', desc: 'Fale diretamente com o time executivo' },
 ]
 
@@ -127,22 +126,6 @@ export default function Header() {
       className={`hdr${solid ? ' solid' : ''}${activeMenu ? ' menu-open' : ''}`}
       ref={hdrRef}
     >
-      {barVisible && (
-        <div className="hdr-bar">
-          <span>Novo: Integração com DREX (Real Digital) disponível —</span>
-          <a href="#contato">
-            Saiba mais{' '}
-            <svg fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </a>
-          <button className="hdr-bar-close" aria-label="fechar" onClick={() => setBarVisible(false)}>
-            <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      )}
 
       <div className="hdr-inner">
         <div className="hdr-main">
@@ -151,7 +134,7 @@ export default function Header() {
           </a>
 
           <nav className="nav-items">
-            {(['sol', 'res', 'emp'] as MenuId[]).map((id) => (
+            {(['emp'] as MenuId[]).map((id) => (
               <button
                 key={id}
                 className={`nav-link${activeMenu === id ? ' active' : ''}`}
@@ -163,12 +146,9 @@ export default function Header() {
                 </svg>
               </button>
             ))}
-            <a href="#como-funciona" className="nav-link plain">Como funciona</a>
-            <a href="#blog" className="nav-link plain">Blog</a>
           </nav>
 
           <div className="nav-actions">
-            <a href="#" className="btn-login">Acessar plataforma</a>
             <a href="#contato" className="btn-demo">Agendar demo</a>
           </div>
 
@@ -303,7 +283,7 @@ export default function Header() {
               </div>
             ))}
             <div className="mega-emp-compliance">
-              {['LGPD', 'SENATRAN', 'DREX', 'ESG'].map(tag => (
+              {['LGPD', 'SENATRAN', 'ESG'].map(tag => (
                 <div key={tag} className="mega-comp-tag">{tag}</div>
               ))}
             </div>
@@ -328,10 +308,7 @@ export default function Header() {
         {/* Mobile */}
         <div className={`mob-panel${mobileOpen ? ' open' : ''}`}>
           <a href="#home" onClick={() => setMobileOpen(false)}>Home</a>
-          <a href="#solucoes" onClick={() => setMobileOpen(false)}>Soluções</a>
-          <a href="#como-funciona" onClick={() => setMobileOpen(false)}>Como funciona</a>
           <a href="#sobre" onClick={() => setMobileOpen(false)}>Empresa</a>
-          <a href="#blog" onClick={() => setMobileOpen(false)}>Blog</a>
           <a href="#" onClick={() => setMobileOpen(false)}>Documentação</a>
           <a href="#contato" className="mob-demo" onClick={() => setMobileOpen(false)}>Agendar demonstração</a>
         </div>

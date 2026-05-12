@@ -13,7 +13,7 @@ export default function Problem() {
           </div>
           <div>
             <p className="sec-sub">
-              Dados fragmentados, históricos adulterados e processos manuais custam bilhões ao setor — e corroem a confiança de toda a cadeia automotiva.
+              Dados fragmentados, históricos adulterados e processos manuais custam bilhões ao setor automotivo — e corroem a confiança de toda a cadeia.
             </p>
           </div>
         </div>

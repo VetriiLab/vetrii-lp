@@ -30,7 +30,6 @@ const COMPLIANCE_ITEMS = [
   { ok: true, label: 'SENATRAN', detail: 'Transferência digital homologada' },
   { ok: true, label: 'DETRAN-PR', detail: 'Integração ativa — Piloto oficial' },
   { ok: true, label: 'Blockchain', detail: 'Registro imutável verificável' },
-  { ok: false, label: 'DREX', detail: 'Integração em andamento' },
 ]
 
 export default function Hero() {
@@ -58,16 +57,15 @@ export default function Hero() {
           <div>
             <div className="hero-eyebrow r v">
               <div className="hero-eyebrow-line"></div>
-              <span>Infraestrutura de Confiança Veicular</span>
+              <span>Passaporte Veicular Digital</span>
             </div>
             <h1 className="r v r1">
-              Rastreabilidade total.<br />
-              <em>Confiança verificável.</em>
+              Tokenização e rastreabilidade<br />
+              <em>do veículo em blockchain.</em>
             </h1>
             <p className="hero-body r v r2">
-              Integramos montadoras, financeiras, seguradoras e reguladores em um{' '}
-              <strong>registro único e imutável</strong> — eliminando fraudes,
-              reduzindo custos operacionais e desbloqueando novos modelos de negócio.
+              A Vetrii transforma veículos e seus componentes em ativos digitais rastreavéis, por meio de{' '}
+              <strong>passaportes digitais inteligentes</strong> que armazenam todo o histórico do ativo — da fabricação ao fim de sua vida útil.
             </p>
             <div className="hero-actions r v r3">
               <a href="#contato" className="btn-p">
@@ -81,7 +79,7 @@ export default function Hero() {
             <div className="hero-trust r v r3">
               <span>Conformidade com</span>
               <div className="trust-pills">
-                {['LGPD', 'SENATRAN', 'DREX', 'ESG'].map(pill => (
+                {['LGPD', 'SENATRAN', 'ESG'].map(pill => (
                   <div key={pill} className="trust-pill">{pill}</div>
                 ))}
               </div>

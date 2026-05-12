@@ -62,60 +62,60 @@ export const stats: StatItem[] = [
 export const problemItems: ProblemItem[] = [
   {
     n: '01',
-    title: 'Fraude e adulteração',
-    body: 'Quilometragem adulterada, histórico forjado e sinistros ocultados. O comprador paga o preço da desconfiança.',
+    title: 'À prova de fraudes',
+    body: 'Eliminação de adulterações de quilometragem e histórico. O registro imutável em blockchain torna a fraude tecnicamente impossível.',
   },
   {
     n: '02',
-    title: 'Dados fragmentados',
-    body: 'Montadora, concessionária, seguradora e DETRAN — cada um com seu sistema. Zero fonte única de verdade.',
+    title: 'Agilidade dos processos',
+    body: 'Transferência de propriedade e financiamento sem burocracia. Processos que levam dias tornam-se minutos com contratos inteligentes.',
   },
   {
     n: '03',
-    title: 'Burocracia extrema',
-    body: 'Transferência, vistoria e financiamento. Processos manuais que demoram dias e custam caro para todos.',
+    title: 'Economia Circular',
+    body: 'Reciclabilidade e revalorização do ativo. Acompanhamento ponta a ponta até o descarte, reuso, remanufatura ou reciclagem.',
   },
 ]
 
 export const solutionRows: SolutionRow[] = [
   {
     name: 'Concessionárias',
-    desc: 'Seminovos com histórico verificável. Transparência que gera confiança e aumenta o ticket médio nas negociações.',
+    desc: 'Valorização dos seminovos, transparência nas negociações e fidelização com serviços de manutenção tokenizados.',
   },
   {
     name: 'Bancos e financeiras',
-    desc: 'Financiamento mais rápido com garantias verificáveis. Integração nativa com DREX e contratos inteligentes.',
+    desc: 'Contratos inteligentes de financiamentos e garantias verificáveis em blockchain para toda a cadeia de crédito veicular.',
   },
   {
     name: 'Seguradoras',
-    desc: 'Precificação de risco com dados reais. Histórico imutável que elimina fraudes em sinistros e reduz perdas operacionais.',
+    desc: 'Avaliação e precificação precisa de riscos, além da redução de fraudes em sinistros.',
   },
   {
-    name: 'Governo e proprietários',
-    desc: 'Transferências digitais, desburocratização e passaporte do veículo que valoriza na revenda e reduz o custo do seguro.',
+    name: 'Governo e reguladores',
+    desc: 'Transferências, emissão e validação de documentos, reduzindo burocracias e otimizando o atendimento ao cidadão.',
   },
 ]
 
 export const howItWorksSteps: HowItWorksStep[] = [
   {
     n: '01',
-    title: 'Registro digital',
-    body: 'O veículo recebe um identificador digital único no momento da fabricação — seu passaporte na blockchain.',
+    title: 'Tokenização',
+    body: 'Criação de um token digital único que representa o veículo em blockchain — seu passaporte imutável desde a fabricação.',
   },
   {
     n: '02',
-    title: 'Rastreabilidade contínua',
-    body: 'Manutenções, trocas de peça e transferências de proprietário. Cada evento registrado de forma imutável.',
+    title: 'Registro de Manutenções',
+    body: 'Oficinas e concessionárias registram os serviços realizados de forma imutável, criando um histórico verificável por qualquer parte.',
   },
   {
     n: '03',
-    title: 'Verificação por qualquer parte',
-    body: 'Compradores, bancos e seguradoras consultam o histórico completo sem intermediários e sem dúvidas.',
+    title: 'Verificação',
+    body: 'Compradores e seguradoras verificam o histórico completo do veículo. Transparência total sem intermediários.',
   },
   {
     n: '04',
-    title: 'Circularidade e descarte',
-    body: 'Remanufatura, reciclagem ou descarte responsável. O ciclo completo do veículo, documentado até o fim.',
+    title: 'Registro de Circularidade',
+    body: 'Acompanhamento ponta a ponta até o descarte, reuso, remanufatura ou reciclagem. O ciclo completo documentado.',
   },
 ]
 
@@ -128,7 +128,7 @@ export const regulationItems: RegulationItem[] = [
   {
     badge: 'FEB',
     title: 'FEBRABAN',
-    body: 'Pilotos do DREX em andamento. Garantias tokenizadas já no radar do setor.',
+    body: 'Garantias tokenizadas já no radar do setor financeiro. Contratos inteligentes reduzem fricção e inadimplência.',
   },
   {
     badge: 'SDP',
@@ -147,25 +147,25 @@ export const teamMembers: TeamMember[] = [
     initials: 'FF',
     name: 'Fabiano Falvo',
     role: 'CEO',
-    desc: 'Engenheiro eletrônico, 25+ anos em sistemas digitais',
+    desc: 'Graduado em Engenharia Eletrônica, 25+ anos em desenvolvimento de sistemas digitais. Entusiasta e evangelista de inovação e transformação digital.',
   },
   {
     initials: 'RG',
     name: 'Roberto Galvão',
     role: 'CFO',
-    desc: '19 anos no setor automotivo e fintech',
+    desc: 'Empreendedor com 25 anos nas áreas financeira, jurídica e administrativa em tecnologia, e 19 anos no segmento automotivo. Fundador de quatro empresas em mobilidade, SaaS e inovação.',
   },
   {
     initials: 'TC',
     name: 'Tathiana Canan',
     role: 'COO',
-    desc: 'Conselheira IBGC · Formação INSEAD',
+    desc: 'Executiva C-Level com 25 anos em gestão e inovação, foco em ativos digitais. Conselheira IBGC e GoNew. Formação executiva em INSEAD e Hackett Group.',
   },
   {
     initials: 'AG',
     name: 'André Giroldo',
     role: 'CPO',
-    desc: '15 anos em produto, web3 e blockchain',
+    desc: '15 anos em gestão de produto e estratégia, sólida experiência em web3, blockchain e inovação digital. Ex-ExxonMobil, ABInbev, Sympla, UL Solutions e Lumx.',
   },
 ]
 
@@ -191,7 +191,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     tag: 'Finanças',
-    title: 'DREX e o mercado automotivo: o que muda para bancos',
+    title: 'Tokenização de garantias veiculares: como funciona na prática',
     meta: '4 min',
     color: 'var(--navy-70)',
     number: '04',
@@ -217,7 +217,6 @@ export const footerColumns: FooterColumn[] = [
       { label: 'Changelog', href: '#', badge: 'Novo' },
       { label: 'SDKs', href: '#' },
       { label: 'Status', href: '#' },
-      { label: 'Blog', href: '#' },
       { label: 'Webinars', href: '#' },
     ],
   },
@@ -225,7 +224,6 @@ export const footerColumns: FooterColumn[] = [
     title: 'Empresa',
     links: [
       { label: 'Sobre nós', href: '#sobre' },
-      { label: 'Carreiras', href: '#' },
       { label: 'Imprensa', href: '#' },
       { label: 'Parcerias', href: '#' },
       { label: 'Contato', href: '#contato' },

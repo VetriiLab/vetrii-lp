@@ -5,10 +5,10 @@ export default function Team() {
     <section className="team" id="sobre">
       <div className="wrap">
         <div className="team-head r">
-          <div className="overline">Empresa</div>
+          <div className="overline">Nosso Time</div>
           <h2 className="sec-title dark">Quem está construindo.</h2>
           <p className="sec-sub dark" style={{ maxWidth: '520px', marginTop: '12px' }}>
-            80+ anos de experiência combinada em tecnologia, finanças e mercado automotivo.
+            80+ anos de experiência combinada em tecnologia, finanças e mercado automotivo. Liderança executiva com histórico comprovado em empresas globais.
           </p>
         </div>
         <div className="team-grid r r1">

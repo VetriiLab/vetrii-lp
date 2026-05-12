@@ -34,8 +34,8 @@ const posts = [
   },
   {
     tag: 'Finanças',
-    title: 'DREX e o mercado automotivo: o que muda para bancos e financeiras',
-    excerpt: 'A moeda digital do Banco Central viabiliza liquidação instantânea de financiamentos com garantia veicular tokenizada — reduzindo risco e custo operacional.',
+    title: 'Tokenização de garantias veiculares: como funciona na prática para bancos',
+    excerpt: 'Contratos inteligentes e garantias tokenizadas aceleram aprovações de crédito e reduzem custos operacionais para toda a cadeia financeira automotiva.',
     meta: '4 min de leitura',
     date: 'Fevereiro 2025',
     accent: '#F59E0B',

@@ -10,9 +10,7 @@ import Solutions from '@/components/sections/Solutions'
 
 import RegulationImpact from '@/components/sections/RegulationImpact'
 import Team from '@/components/sections/Team'
-import Blog from '@/components/sections/Blog'
 import CTA from '@/components/sections/CTA'
-import BigPicture from '@/components/sections/BigPicture'
 import Footer from '@/components/Footer/Footer'
 
 export default function Home() {
@@ -38,12 +36,10 @@ export default function Home() {
       <Stats />
       <Problem />
       <ImpactSection />
-      <BigPicture />
       <Solutions />
 
       <RegulationImpact />
       <Team />
-      <Blog />
       <CTA />
       <Footer />
     </>
