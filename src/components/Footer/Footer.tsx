@@ -1,38 +1,8 @@
 'use client'
 
-import { useState } from 'react'
-import { footerColumns } from '@/lib/data'
-
 export default function Footer() {
-  const [email, setEmail] = useState('')
-
-  const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-  }
-
   return (
     <footer className="footer">
-      {/* Newsletter */}
-      <div className="footer-newsletter">
-        <div className="wrap">
-          <div className="footer-newsletter-layout">
-            <div>
-              <h4>Fique por dentro do mercado automotivo digital</h4>
-              <p>Regulação, passaportes digitais e ESG — na sua caixa de entrada.</p>
-            </div>
-            <form className="footer-newsletter-form" onSubmit={handleNewsletterSubmit}>
-              <input
-                type="email"
-                placeholder="seu@email.com"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              />
-              <button type="submit">Assinar</button>
-            </form>
-          </div>
-        </div>
-      </div>
-
       {/* Trust */}
       <div className="footer-trust">
         <div className="wrap">
@@ -68,8 +38,7 @@ export default function Footer() {
           <div className="footer-top-layout">
             <div className="footer-brand">
               <div className="footer-logo">
-                <div className="m">V</div>
-                <span>vetrii</span>
+                <img src="/assets/images/vetrii_logo.png" alt="Vetrii" style={{ height: '32px', width: 'auto' }} />
               </div>
               <p>Passaporte Veicular Digital — rastreabilidade do chassi ao descarte, conectando toda a cadeia automotiva brasileira.</p>
               <div className="footer-brand-contact">
@@ -88,20 +57,6 @@ export default function Footer() {
                 </a>
               </div>
             </div>
-
-            {footerColumns.map(col => (
-              <div key={col.title} className="footer-col">
-                <h4>{col.title}</h4>
-                <nav>
-                  {col.links.map(link => (
-                    <a key={link.label} href={link.href}>
-                      {link.label}
-                      {link.badge && <span className="badge">{link.badge}</span>}
-                    </a>
-                  ))}
-                </nav>
-              </div>
-            ))}
           </div>
         </div>
       </div>

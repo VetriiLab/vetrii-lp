@@ -134,18 +134,10 @@ export default function Header() {
           </a>
 
           <nav className="nav-items">
-            {(['emp'] as MenuId[]).map((id) => (
-              <button
-                key={id}
-                className={`nav-link${activeMenu === id ? ' active' : ''}`}
-                onClick={(e) => { e.stopPropagation(); toggle(id) }}
-              >
-                {MENU_LABELS[id]}
-                <svg fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-            ))}
+            <a href="#solucoes" className="nav-link">Soluções</a>
+            <a href="#inteligencia" className="nav-link">Benefícios</a>
+            <a href="#sobre" className="nav-link">Equipe</a>
+            <a href="#contato" className="nav-link">Contato</a>
           </nav>
 
           <div className="nav-actions">
@@ -307,9 +299,9 @@ export default function Header() {
 
         {/* Mobile */}
         <div className={`mob-panel${mobileOpen ? ' open' : ''}`}>
-          <a href="#home" onClick={() => setMobileOpen(false)}>Home</a>
-          <a href="#sobre" onClick={() => setMobileOpen(false)}>Empresa</a>
-          <a href="#" onClick={() => setMobileOpen(false)}>Documentação</a>
+          <a href="#solucoes" onClick={() => setMobileOpen(false)}>Soluções</a>
+          <a href="#inteligencia" onClick={() => setMobileOpen(false)}>Benefícios</a>
+          <a href="#sobre" onClick={() => setMobileOpen(false)}>Equipe</a>
           <a href="#contato" className="mob-demo" onClick={() => setMobileOpen(false)}>Agendar demonstração</a>
         </div>
       </div>

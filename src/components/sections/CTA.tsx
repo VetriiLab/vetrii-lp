@@ -1,24 +1,6 @@
 'use client'
 
-import { useState } from 'react'
-
-interface FormState {
-  name: string
-  email: string
-  segment: string
-}
-
 export default function CTA() {
-  const [form, setForm] = useState<FormState>({ name: '', email: '', segment: '' })
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setForm(prev => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-  }
 
   return (
     <section className="cta" id="contato">
@@ -41,52 +23,17 @@ export default function CTA() {
             </div>
 
             <div className="cta-r">
-              <h3>Agendar demonstração</h3>
-              <form onSubmit={handleSubmit}>
-                <div className="fg">
-                  <label className="fl" htmlFor="cta-name">Nome</label>
-                  <input
-                    id="cta-name"
-                    type="text"
-                    name="name"
-                    className="fi"
-                    placeholder="Seu nome completo"
-                    value={form.name}
-                    onChange={handleChange}
-                  />
+              <div className="cta-email-box">
+                <h3>Pronto para começar?</h3>
+                <p>Nossa equipe está à disposição para apresentar como a Vetrii pode transformar a rastreabilidade do seu negócio.</p>
+                <a href="mailto:info@vetrii.com" className="cta-email-link">
+                  info@vetrii.com
+                </a>
+                <div className="cta-availability">
+                  <div className="status-dot"></div>
+                  <span>Resposta em até 24h</span>
                 </div>
-                <div className="fg">
-                  <label className="fl" htmlFor="cta-email">E-mail corporativo</label>
-                  <input
-                    id="cta-email"
-                    type="email"
-                    name="email"
-                    className="fi"
-                    placeholder="nome@empresa.com"
-                    value={form.email}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="fg">
-                  <label className="fl" htmlFor="cta-segment">Segmento</label>
-                  <select
-                    id="cta-segment"
-                    name="segment"
-                    className="fi"
-                    value={form.segment}
-                    onChange={handleChange}
-                  >
-                    <option value="" disabled>Selecione</option>
-                    <option>Montadora</option>
-                    <option>Concessionária</option>
-                    <option>Banco / Financeira</option>
-                    <option>Seguradora</option>
-                    <option>Governo</option>
-                    <option>Outro</option>
-                  </select>
-                </div>
-                <button type="submit" className="fs">Solicitar demonstração</button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
