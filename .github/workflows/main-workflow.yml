@@ -1,0 +1,55 @@
+name: main-workflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  pull-requests: write
+  contents: write
+  repository-projects: write
+  issues: write
+
+jobs:
+  install:
+    name: Install Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ./.github/actions/setup-node-yarn
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ./.github/actions/setup-node-yarn
+
+      - name: Run lint
+        run: |
+          cd app
+          yarn lint
+          yarn tsc --noEmit
+
+  # Note: Amplify is doing the build step
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [lint]
+    environment: production
+    steps:
+      - name: Deploy to production
+        if: github.ref == 'refs/heads/main'
+        env:
+          deploy_url: ${{ secrets.AMPLIFY_WEBHOOK }}
+        run: |
+          curl -X POST -d {} $deploy_url -H "Content-Type: application/json"

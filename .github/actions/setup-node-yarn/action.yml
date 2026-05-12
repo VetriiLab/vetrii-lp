@@ -1,0 +1,27 @@
+name: setup-node-yarn
+description: "Setup Node.js 22, restore yarn cache and node_modules for the app/ directory"
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v5
+      with:
+        node-version: "22"
+        cache: "yarn"
+        cache-dependency-path: "app/yarn.lock"
+
+    - name: Restore node_modules cache
+      id: cache-node-modules
+      uses: actions/cache@v5
+      with:
+        path: app/node_modules
+        key: node_modules-${{ runner.os }}-${{ hashFiles('app/yarn.lock') }}
+        restore-keys: |
+          node_modules-${{ runner.os }}-
+
+    - name: Install dependencies (if cache miss)
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        cd app
+        yarn install --frozen-lockfile
