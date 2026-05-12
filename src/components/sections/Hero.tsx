@@ -7,7 +7,6 @@ const PARTNERS = [
   { name: 'DETRAN', sub: 'Paraná', src: '/assets/images/logo_detran_250x71.png', w: 125, h: 36 },
   { name: 'TECPAR', sub: 'Instituto de Tecnologia do Paraná', src: '/assets/images/logo_tecpar_232x80.png', w: 116, h: 40 },
 ]
-const MARQUEE_ITEMS = [...PARTNERS, ...PARTNERS, ...PARTNERS, ...PARTNERS]
 
 type TabId = 'overview' | 'history' | 'compliance'
 
@@ -243,22 +242,20 @@ export default function Hero() {
       </div>
 
       {/* Partners marquee — pinned to bottom of hero */}
-      <div className="hero-partners">
+      <div className="hero-partners static">
         <div className="partners-label">Parceiros institucionais</div>
-        <div className="partners-track-wrap">
-          <div className="partners-track">
-            {MARQUEE_ITEMS.map((p, i) => (
-              <div key={i} className="partner-item">
-                <Image
-                  src={p.src}
-                  alt={p.name}
-                  width={p.w}
-                  height={p.h}
-                  className="partner-logo"
-                />
-              </div>
-            ))}
-          </div>
+        <div className="partners-list">
+          {PARTNERS.map((p, i) => (
+            <div key={i} className="partner-item">
+              <Image
+                src={p.src}
+                alt={p.name}
+                width={p.w}
+                height={p.h}
+                className="partner-logo"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>
