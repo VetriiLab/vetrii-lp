@@ -4,11 +4,11 @@ import { useEffect } from 'react'
 import Header from '@/components/Header/Header'
 import Hero from '@/components/sections/Hero'
 import Stats from '@/components/sections/Stats'
+import { TransformingSection } from '@/components/sections/TransformingSection'
 import Problem from '@/components/sections/Problem'
 import ImpactSection from '@/components/sections/ImpactSection'
 import Solutions from '@/components/sections/Solutions'
 
-import RegulationImpact from '@/components/sections/RegulationImpact'
 import Team from '@/components/sections/Team'
 import CTA from '@/components/sections/CTA'
 import Footer from '@/components/Footer/Footer'
@@ -34,11 +34,11 @@ export default function Home() {
       <Header />
       <Hero />
       <Stats />
+      <TransformingSection />
       <Problem />
       <ImpactSection />
       <Solutions />
 
-      <RegulationImpact />
       <Team />
       <CTA />
       <Footer />

@@ -7,10 +7,24 @@ const customConfig = defineConfig({
   theme: {
     tokens: {
       colors: {
-        border: { value: '#E2E8F0' },
-        surface: { value: '#F7FAFC' },
+        navy: { value: '#090F1C' },
         primary: { value: '#6251da' },
+        border: { value: '#E2E8F0' },
+        surface: { value: '#FFFFFF' },
         subtleText: { value: '#718096' }
+      }
+    },
+    semanticTokens: {
+      colors: {
+        bg: {
+          value: { base: '{colors.surface}', _dark: '{colors.navy}' }
+        },
+        text: {
+          value: { base: '{colors.navy}', _dark: '#FFFFFF' }
+        },
+        muted: {
+          value: { base: '{colors.subtleText}', _dark: 'rgba(255, 255, 255, 0.6)' }
+        }
       }
     }
   }
