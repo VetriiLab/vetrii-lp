@@ -73,7 +73,7 @@ export default function Hero() {
             <Flex direction={{ base: "column", sm: "row" }} gap={4} w={{ base: "full", sm: "auto" }}>
               <Button
                 as="a"
-                // @ts-ignore
+                // @ts-expect-error
                 href="#contato"
                 bg="primary"
                 color="white"
@@ -92,7 +92,7 @@ export default function Hero() {
               </Button>
               <Button
                 as="a"
-                // @ts-ignore
+                // @ts-expect-error
                 href="#solucoes"
                 variant="outline"
                 borderColor="rgba(255, 255, 255, 0.2)"

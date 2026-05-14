@@ -3,34 +3,6 @@ import { howItWorksSteps } from '@/lib/data'
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const LEFT_ENTITIES = [
-  {
-    id: 'restricoes',
-    title: 'Restrições e bloqueios',
-    bullets: ['Sinistros', 'Renajud', 'Débitos'],
-    side: 'left' as const,
-  },
-  {
-    id: 'pecas',
-    title: 'Peças de reuso',
-    bullets: [],
-    side: 'left' as const,
-    indent: true,
-  },
-  {
-    id: 'diario',
-    title: 'Diário do proprietário',
-    bullets: ['Acessórios', 'Melhorias', 'Fotos', 'Manutenções fora rede'],
-    side: 'left' as const,
-  },
-  {
-    id: 'proprietario',
-    title: 'Proprietário atual',
-    bullets: ['Prop 1', 'Prop 2', 'Prop 3', 'Prop n'],
-    side: 'left' as const,
-    bold: true,
-  },
-]
 
 interface RightItem { text: string; external?: string }
 interface RightEntity { id: string; title: string; items: RightItem[] }

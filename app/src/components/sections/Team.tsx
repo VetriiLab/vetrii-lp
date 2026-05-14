@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { teamMembers } from '@/lib/data'
 
 function LinkedInIcon() {
@@ -31,11 +32,12 @@ export default function Team() {
           {teamMembers.map(member => (
             <div key={member.initials} className="team-m">
               <div className="team-photo-wrap">
-                <img
+                <Image
                   src={member.photo}
                   alt={member.name}
+                  width={96}
+                  height={96}
                   className="team-photo-img"
-                  loading="lazy"
                 />
               </div>
               <h3>{member.name}</h3>

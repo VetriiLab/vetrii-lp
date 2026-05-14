@@ -5,11 +5,6 @@ import { useState, useEffect, useRef } from 'react'
 
 type MenuId = 'sol' | 'res' | 'emp'
 
-const MENU_LABELS: Record<MenuId, string> = {
-  sol: 'Soluções',
-  res: 'Recursos',
-  emp: 'Empresa',
-}
 
 const SEGMENTS = [
   { label: 'Montadoras', desc: 'Emissão de passaportes digitais' },
@@ -96,7 +91,6 @@ function ArrowRight({ size = 12 }: { size?: number }) {
 }
 
 export default function Header() {
-  const [barVisible, setBarVisible] = useState(true)
   const [activeMenu, setActiveMenu] = useState<MenuId | null>(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [solid, setSolid] = useState(false)
@@ -118,7 +112,6 @@ export default function Header() {
     return () => document.removeEventListener('click', onClick)
   }, [])
 
-  const toggle = (id: MenuId) => setActiveMenu(prev => (prev === id ? null : id))
   const close = () => setActiveMenu(null)
 
   return (
