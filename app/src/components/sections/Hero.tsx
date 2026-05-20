@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { Box, Container, Heading, Text, Flex, SimpleGrid, Button, Badge, Stack } from '@chakra-ui/react'
 import Image from 'next/image'
 
 const PARTNERS = [
@@ -8,256 +8,218 @@ const PARTNERS = [
   { name: 'TECPAR', sub: 'Instituto de Tecnologia do Paraná', src: '/assets/images/logo_tecpar_232x80.png', w: 116, h: 40 },
 ]
 
-type TabId = 'overview' | 'history' | 'compliance'
-
-const TABS: { id: TabId; label: string }[] = [
-  { id: 'overview', label: 'Visão Geral' },
-  { id: 'history', label: 'Histórico' },
-  { id: 'compliance', label: 'Conformidade' },
-]
-
-const HISTORY_EVENTS = [
-  { date: 'jan/2026', desc: 'Revisão 30.000 km — Autorizada Toyota' },
-  { date: 'out/2025', desc: 'Substituição de pneus — Homologado' },
-  { date: 'mar/2025', desc: 'Transferência de propriedade — DETRAN-PR' },
-  { date: 'ago/2024', desc: 'Recall preventivo — Executado' },
-  { date: 'jan/2024', desc: 'Emplacamento — Registro inicial' },
-]
-
-const COMPLIANCE_ITEMS = [
-  { ok: true, label: 'LGPD', detail: 'Dados protegidos e auditáveis' },
-  { ok: true, label: 'SENATRAN', detail: 'Transferência digital homologada' },
-  { ok: true, label: 'DETRAN-PR', detail: 'Integração ativa — Piloto oficial' },
-  { ok: true, label: 'Blockchain', detail: 'Registro imutável verificável' },
-]
-
 export default function Hero() {
-  const [showPassport, setShowPassport] = useState(false)
-  const [tab, setTab] = useState<TabId>('overview')
-
-  useEffect(() => {
-    const checkWidth = () => setShowPassport(window.innerWidth >= 1024)
-    checkWidth()
-    window.addEventListener('resize', checkWidth)
-    return () => window.removeEventListener('resize', checkWidth)
-  }, [])
-
   return (
-    <section className="hero" id="home">
-      <video className="hero-video" autoPlay muted loop playsInline preload="auto">
-        <source src="/assets/videos/bg.mp4" type="video/mp4" />
-      </video>
-      <div className="hero-video-overlay"></div>
-      <div className="hero-glow"></div>
-      <div className="hero-glow2"></div>
-      <div className="hero-lines"></div>
-      <div className="wrap hero-content">
-        <div className="hero-layout">
-          <div>
-            <div className="hero-eyebrow r v">
-              <div className="hero-eyebrow-line"></div>
-              <span>Passaporte Veicular Digital</span>
-            </div>
-            <h1 className="r v r1">
-              Tokenização e rastreabilidade<br />
-              <em>do veículo em blockchain.</em>
-            </h1>
-            <p className="hero-body r v r2">
-              A Vetrii transforma veículos e seus componentes em ativos digitais rastreavéis, por meio de{' '}
-              <strong>passaportes digitais inteligentes</strong> que armazenam todo o histórico do ativo — da fabricação ao fim de sua vida útil.
-            </p>
-            <div className="hero-actions r v r3">
-              <a href="#contato" className="btn-p">
-                Solicitar demonstração executiva{' '}
-                <svg fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </a>
-              <a href="#solucoes" className="btn-g">Soluções por segmento</a>
-            </div>
-            <div className="hero-trust r v r3">
-              <span>Conformidade com</span>
-              <div className="trust-pills">
+    <Box
+      as="section"
+      id="home"
+      position="relative"
+      pt={{ base: "140px", md: "180px" }}
+      pb={{ base: 24, md: 40 }}
+      overflow="hidden"
+      bg="navy"
+    >
+      {/* Video Background */}
+      <Box position="absolute" inset={0} zIndex={0}>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.3 }}
+        >
+          <source src="/assets/videos/bg.mp4" type="video/mp4" />
+        </video>
+        <Box
+          position="absolute"
+          inset={0}
+          bgGradient="to-b"
+          gradientFrom="rgba(9, 15, 28, 0.4)"
+          gradientTo="navy"
+        />
+      </Box>
+
+      <Container maxW="1440px" mx="auto" position="relative" zIndex={1} px={{ base: 6, md: 10 }} py={{ base: 6, md: 20 }}>
+        <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 16, lg: 24 }} alignItems="center">
+          {/* Content Left */}
+          <Stack gap={8} textAlign={{ base: "center", lg: "left" }} align={{ base: "center", lg: "flex-start" }}>
+            <Stack gap={4}>
+              <Flex align="center" gap={3} justify={{ base: "center", lg: "flex-start" }}>
+                <Box h="1.5px" w={10} bg="primary" />
+                <Text color="primary" fontSize="xs" fontWeight="800" letterSpacing="0.2em" textTransform="uppercase">
+                  Passaporte Veicular Digital
+                </Text>
+              </Flex>
+
+              <Heading
+                as="h1"
+                size={{ base: "4xl", md: "5xl" }}
+                color="white"
+                lineHeight="1.1"
+                fontWeight="800"
+                letterSpacing="-0.02em"
+              >
+                Tokenização e rastreabilidade <br />
+                <Text as="span" opacity={0.6} fontStyle="italic" fontWeight="400">do veículo em blockchain.</Text>
+              </Heading>
+
+              <Text fontSize={{ base: "lg", md: "xl" }} color="rgba(255, 255, 255, 0.6)" maxW="xl" lineHeight="tall">
+                A Vetrii transforma veículos e seus componentes em ativos digitais rastreavéis, por meio de
+                <Text as="span" color="white" fontWeight="semibold"> passaportes digitais inteligentes</Text> que armazenam todo o histórico do ativo — da fabricação ao fim de sua vida útil.
+              </Text>
+            </Stack>
+
+            <Flex direction={{ base: "column", sm: "row" }} gap={4} w={{ base: "full", sm: "auto" }}>
+              <Button
+                as="a"
+                // @ts-expect-error Chakra Button `as="a"` does not expose href in types
+                href="#contato"
+                bg="primary"
+                color="white"
+                size="xl"
+                h="60px"
+                px={10}
+                borderRadius="none"
+                fontSize="xs"
+                fontWeight="800"
+                textTransform="uppercase"
+                letterSpacing="0.05em"
+                _hover={{ bg: "primary", opacity: 0.9 }}
+                _active={{ transform: "scale(0.98)" }}
+              >
+                Solicitar demonstração executiva
+              </Button>
+              <Button
+                as="a"
+                // @ts-expect-error Chakra Button `as="a"` does not expose href in types
+                href="#solucoes"
+                variant="outline"
+                borderColor="rgba(255, 255, 255, 0.2)"
+                color="white"
+                size="xl"
+                h="60px"
+                px={10}
+                borderRadius="none"
+                fontSize="xs"
+                fontWeight="800"
+                textTransform="uppercase"
+                letterSpacing="0.05em"
+                _hover={{ bg: "rgba(255, 255, 255, 0.05)", borderColor: "white" }}
+              >
+                Soluções por segmento
+              </Button>
+            </Flex>
+
+            <Stack gap={4}>
+              <Text fontSize="10px" fontWeight="800" color="rgba(255, 255, 255, 0.3)" textTransform="uppercase" letterSpacing="0.15em">
+                Conformidade com
+              </Text>
+              <Flex gap={3} justify={{ base: "center", lg: "flex-start" }}>
                 {['LGPD', 'SENATRAN', 'ESG'].map(pill => (
-                  <div key={pill} className="trust-pill">{pill}</div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="passport r v r2"
-            id="psp"
-            style={{ display: showPassport ? 'block' : 'none' }}
-          >
-            <div className="psp">
-              <div className="psp-head">
-                <div className="psp-brand">
-                  <div className="m">V</div>
-                  <div>
-                    <span className="t">Passaporte Digital</span>
-                    <span className="s">#VTR-2026-0847A</span>
-                  </div>
-                </div>
-                <div className="psp-status-wrap">
-                  <div className="psp-status-dot"></div>
-                  <div className="psp-status">Verificado</div>
-                </div>
-              </div>
-
-              <div className="psp-vehicle">
-                <div className="psp-vehicle-main">Toyota Corolla Cross XRE</div>
-                <div className="psp-vehicle-sub">2024 · 28.430 km · Prata Lunar · Flex</div>
-                <div className="psp-vehicle-vin">Chassi: 9BWZZZ377VT004251</div>
-              </div>
-
-              <div className="psp-tabs">
-                {TABS.map(t => (
-                  <button
-                    key={t.id}
-                    className={`psp-tab${tab === t.id ? ' active' : ''}`}
-                    onClick={() => setTab(t.id)}
+                  <Badge
+                    key={pill}
+                    bg="rgba(255, 255, 255, 0.03)"
+                    color="rgba(255, 255, 255, 0.5)"
+                    borderWidth="1px"
+                    borderColor="rgba(255, 255, 255, 0.08)"
+                    px={4}
+                    py={1.5}
+                    fontSize="10px"
+                    borderRadius="none"
+                    textTransform="none"
+                    fontWeight="700"
                   >
-                    {t.label}
-                  </button>
+                    {pill}
+                  </Badge>
                 ))}
-              </div>
+              </Flex>
+            </Stack>
+          </Stack>
 
-              {tab === 'overview' && (
-                <div className="psp-body">
-                  <div className="psp-row">
-                    <div className="psp-cell">
-                      <div className="psp-lbl">Proprietário</div>
-                      <div className="psp-val">2.º dono</div>
-                      <div className="psp-sub">Desde mar/2025</div>
-                    </div>
-                    <div className="psp-cell">
-                      <div className="psp-lbl">Valor estimado</div>
-                      <div className="psp-val">R$ 178.500</div>
-                      <div className="psp-sub psp-up">+3,2% vs. mercado</div>
-                    </div>
-                  </div>
-                  <div className="psp-row">
-                    <div className="psp-cell">
-                      <div className="psp-lbl">Manutenções</div>
-                      <div className="psp-val">4 registros</div>
-                      <div className="psp-sub">Última: jan/2026</div>
-                    </div>
-                    <div className="psp-cell">
-                      <div className="psp-lbl">Sinistros</div>
-                      <div className="psp-val">Nenhum</div>
-                      <div className="psp-sub psp-clean">Histórico limpo</div>
-                    </div>
-                  </div>
-                  <div className="psp-row full">
-                    <div className="psp-cell">
-                      <div className="psp-lbl">Score de Confiança Vetrii</div>
-                      <div className="psp-score-row">
-                        <div className="psp-score-bar">
-                          <div className="psp-score-fill" style={{ width: '94%' }}></div>
-                        </div>
-                        <div className="psp-score-val">94<span>/100</span></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="psp-row full">
-                    <div className="psp-cell">
-                      <div className="psp-lbl">Ciclo de vida</div>
-                      <div className="psp-bar">
-                        <span style={{ background: 'rgba(98,81,218,0.75)', flex: 3 }} title="Fabricação"></span>
-                        <span style={{ background: 'rgba(98,81,218,0.45)', flex: 2 }} title="1.º dono"></span>
-                        <span style={{ background: 'rgba(98,81,218,0.25)', flex: 2 }} title="2.º dono (atual)"></span>
-                        <span style={{ background: 'rgba(255,255,255,0.04)', flex: 3 }} title="Disponível"></span>
-                      </div>
-                      <div className="psp-bar-labels">
-                        <span>Fabricação</span>
-                        <span>1.º dono</span>
-                        <span>2.º dono</span>
-                        <span>—</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {tab === 'history' && (
-                <div className="psp-body">
-                  <div className="psp-timeline">
-                    {HISTORY_EVENTS.map((ev, i) => (
-                      <div key={i} className="psp-tl-item">
-                        <div className="psp-tl-left">
-                          <div className="psp-tl-dot"></div>
-                          {i < HISTORY_EVENTS.length - 1 && <div className="psp-tl-line"></div>}
-                        </div>
-                        <div className="psp-tl-content">
-                          <div className="psp-tl-date">{ev.date}</div>
-                          <div className="psp-tl-desc">{ev.desc}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {tab === 'compliance' && (
-                <div className="psp-body">
-                  {COMPLIANCE_ITEMS.map((item, i) => (
-                    <div key={i} className="psp-compliance-item">
-                      <div className={`psp-compliance-icon${item.ok ? ' ok' : ' pending'}`}>
-                        {item.ok ? (
-                          <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                        ) : (
-                          <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" /><path strokeLinecap="round" d="M12 8v4m0 4h.01" />
-                          </svg>
-                        )}
-                      </div>
-                      <div>
-                        <div className="psp-compliance-label">{item.label}</div>
-                        <div className="psp-compliance-detail">{item.detail}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <div className="psp-footer">
-                <div className="psp-footer-badges">
-                  <span>Blockchain</span>
-                  <span>LGPD</span>
-                  <span>DETRAN-PR</span>
-                </div>
-                <a href="#">
-                  Ver relatório completo{' '}
-                  <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Partners marquee — pinned to bottom of hero */}
-      <div className="hero-partners static">
-        <div className="partners-label">Parceiros institucionais</div>
-        <div className="partners-list">
-          {PARTNERS.map((p, i) => (
-            <div key={i} className="partner-item">
+          {/* Images Right - Dashboard + Mobile Passport */}
+          <Box position="relative" w="full" px={{ base: 4, md: 0 }}>
+            {/* Dashboard Background */}
+            <Box
+              borderRadius="24px"
+              overflow="hidden"
+              borderWidth="1px"
+              borderColor="rgba(255, 255, 255, 0.08)"
+              bg="rgba(255, 255, 255, 0.01)"
+              position="relative"
+            >
               <Image
-                src={p.src}
-                alt={p.name}
-                width={p.w}
-                height={p.h}
-                className="partner-logo"
+                src="/assets/images/dashboard.jpeg"
+                alt="Vetrii Dashboard"
+                width={1400}
+                height={800}
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+                priority
               />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+            </Box>
+
+            {/* Passport Overlaid */}
+            <Box
+              position="absolute"
+              bottom={{ base: "-8%", md: "-10%", lg: "-12%" }}
+              right={{ base: "2%", md: "-2%", lg: "-5%" }}
+              w={{ base: "140px", sm: "180px", md: "240px", lg: "280px" }}
+              borderRadius="24px"
+              overflow="hidden"
+              borderWidth="1px"
+              borderColor="rgba(255, 255, 255, 0.12)"
+              bg="navy"
+            >
+              <Image
+                src="/assets/images/passaporte-digital.jpeg"
+                alt="Passaporte Digital Mobile"
+                width={400}
+                height={800}
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              />
+            </Box>
+          </Box>
+        </SimpleGrid>
+      </Container>
+
+      {/* Partners Footer Section */}
+      <Box
+        position="absolute"
+        bottom={0}
+        left={0}
+        right={0}
+        bg="white"
+        py={8}
+        borderTopWidth="1px"
+        borderColor="border"
+      >
+        <Container maxW="1440px" mx="auto" px={{ base: 6, md: 10 }}>
+          <Flex direction={{ base: "column", md: "row" }} align="center" gap={{ base: 6, md: 16 }}>
+            <Text
+              fontSize="10px"
+              fontWeight="800"
+              color="gray.400"
+              textTransform="uppercase"
+              letterSpacing="0.2em"
+              whiteSpace="nowrap"
+            >
+              Parceiros institucionais
+            </Text>
+            <Flex gap={{ base: 8, md: 12 }} align="center" wrap="wrap" justify="center">
+              {PARTNERS.map((p, i) => (
+                <Image
+                  key={i}
+                  src={p.src}
+                  alt={p.name}
+                  width={p.w}
+                  height={p.h}
+                  style={{ opacity: 0.6, filter: 'grayscale(100%)', height: 'auto' }}
+                />
+              ))}
+            </Flex>
+          </Flex>
+        </Container>
+      </Box>
+    </Box>
   )
 }

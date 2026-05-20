@@ -4,8 +4,6 @@ export default function Partners() {
     { name: 'TECPAR', sub: 'Instituto de Tecnologia do Paraná', abbr: 'TP' },
   ]
 
-  const items = [...partners, ...partners, ...partners, ...partners]
-
   return (
     <div className="partners-bar static">
       <div className="partners-label">Parceiros institucionais</div>

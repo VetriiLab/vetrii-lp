@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { solutionRows } from '@/lib/data'
 
 const meta: Record<string, { kpi: string; kpiLabel: string; tag: string }> = {
@@ -72,10 +73,11 @@ export default function Solutions() {
             </a>
           </div>
           <div className="sol-hero-img">
-            <img
+            <Image
               src="/assets/images/montadora.png"
               alt="Linha de produção da montadora"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.8 }}
+              fill
+              style={{ objectFit: 'cover', opacity: 0.8 }}
             />
           </div>
         </div>

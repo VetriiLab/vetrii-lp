@@ -31,6 +31,9 @@ export interface TeamMember {
   name: string
   role: string
   desc: string
+  photo: string
+  linkedin?: string
+  email?: string
 }
 
 export interface BlogPost {
@@ -148,24 +151,35 @@ export const teamMembers: TeamMember[] = [
     name: 'Fabiano Falvo',
     role: 'CEO',
     desc: 'Graduado em Engenharia Eletrônica, 25+ anos em desenvolvimento de sistemas digitais. Entusiasta e evangelista de inovação e transformação digital.',
+    photo: '/assets/images/equipe/fabiano2.jpg',
+    linkedin: 'https://www.linkedin.com/in/fabianofalvo/',
+    email: 'fabiano.falvo@vetrii.com',
   },
   {
     initials: 'RG',
     name: 'Roberto Galvão',
-    role: 'CFO',
+    role: 'CFO - Financeiro',
     desc: 'Empreendedor com 25 anos nas áreas financeira, jurídica e administrativa em tecnologia, e 19 anos no segmento automotivo. Fundador de quatro empresas em mobilidade, SaaS e inovação.',
+    photo: '/assets/images/equipe/roberto_2.jpg',
+    email: 'roberto.galvao@vetrii.com',
   },
   {
     initials: 'TC',
     name: 'Tathiana Canan',
-    role: 'COO',
-    desc: 'Executiva C-Level com 25 anos em gestão e inovação, foco em ativos digitais. Conselheira IBGC e GoNew. Formação executiva em INSEAD e Hackett Group.',
+    role: 'COO - Operações',
+    desc: 'Executiva C-Level com 25 anos em gestão e inovação, foco em ativos digitais. Conselheira IBGC e GoNew. Formação executiva em Estratégia de Disrupção Digital (INSEAD) e Global Business Services (Hackett Group).',
+    photo: '/assets/images/equipe/tati_2.jpg',
+    linkedin: 'https://www.linkedin.com/in/tathiana-canan-4b14221b/',
+    email: 'tathiana.canan@vetrii.com',
   },
   {
     initials: 'AG',
     name: 'André Giroldo',
-    role: 'CPO',
+    role: 'CPO - Produto',
     desc: '15 anos em gestão de produto e estratégia, sólida experiência em web3, blockchain e inovação digital. Ex-ExxonMobil, ABInbev, Sympla, UL Solutions e Lumx.',
+    photo: '/assets/images/equipe/Andre.jpg',
+    linkedin: 'https://www.linkedin.com/in/andreqgiroldo/',
+    email: 'andre.giroldo@vetrii.com',
   },
 ]
 

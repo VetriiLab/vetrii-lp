@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -38,7 +40,7 @@ export default function Footer() {
           <div className="footer-top-layout">
             <div className="footer-brand">
               <div className="footer-logo">
-                <img src="/assets/images/vetrii_logo.png" alt="Vetrii" style={{ height: '32px', width: 'auto' }} />
+                <Image src="/assets/images/vetrii_logo.png" alt="Vetrii" width={120} height={32} style={{ height: '32px', width: 'auto' }} />
               </div>
               <p>Passaporte Veicular Digital — rastreabilidade do chassi ao descarte, conectando toda a cadeia automotiva brasileira.</p>
               <div className="footer-brand-contact">
