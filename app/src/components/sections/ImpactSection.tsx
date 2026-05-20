@@ -37,7 +37,6 @@ export default function ImpactSection() {
       <div className="wrap">
         <div className="intel-layout">
           <div className="intel-left">
-            <div className="overline">Benefícios para toda a cadeia automotiva</div>
             <h2 className="sec-title">
               A primeira plataforma<br />
               <span>para todo o processo veicular.</span>
