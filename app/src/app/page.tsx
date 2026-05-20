@@ -3,7 +3,6 @@
 import { useEffect } from 'react'
 import Header from '@/components/Header/Header'
 import Hero from '@/components/sections/Hero'
-import Stats from '@/components/sections/Stats'
 import { TransformingSection } from '@/components/sections/TransformingSection'
 import Problem from '@/components/sections/Problem'
 import ImpactSection from '@/components/sections/ImpactSection'
@@ -33,7 +32,7 @@ export default function Home() {
     <>
       <Header />
       <Hero />
-      <Stats />
+      {/* <Stats /> */}
       <TransformingSection />
       <Problem />
       <ImpactSection />

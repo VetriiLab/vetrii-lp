@@ -1,12 +1,7 @@
 'use client'
 
-import { Box, Container, Heading, Text, Flex, SimpleGrid, Button, Badge, Stack } from '@chakra-ui/react'
+import { Box, Container, Heading, Text, Flex, SimpleGrid, Button, Stack } from '@chakra-ui/react'
 import Image from 'next/image'
-
-const PARTNERS = [
-  { name: 'DETRAN', sub: 'Paraná', src: '/assets/images/logo_detran_250x71.png', w: 125, h: 36 },
-  { name: 'TECPAR', sub: 'Instituto de Tecnologia do Paraná', src: '/assets/images/logo_tecpar_232x80.png', w: 116, h: 40 },
-]
 
 export default function Hero() {
   return (
@@ -111,30 +106,6 @@ export default function Hero() {
               </Button>
             </Flex>
 
-            <Stack gap={4}>
-              <Text fontSize="10px" fontWeight="800" color="rgba(255, 255, 255, 0.3)" textTransform="uppercase" letterSpacing="0.15em">
-                Conformidade com
-              </Text>
-              <Flex gap={3} justify={{ base: "center", lg: "flex-start" }}>
-                {['LGPD', 'SENATRAN', 'ESG'].map(pill => (
-                  <Badge
-                    key={pill}
-                    bg="rgba(255, 255, 255, 0.03)"
-                    color="rgba(255, 255, 255, 0.5)"
-                    borderWidth="1px"
-                    borderColor="rgba(255, 255, 255, 0.08)"
-                    px={4}
-                    py={1.5}
-                    fontSize="10px"
-                    borderRadius="none"
-                    textTransform="none"
-                    fontWeight="700"
-                  >
-                    {pill}
-                  </Badge>
-                ))}
-              </Flex>
-            </Stack>
           </Stack>
 
           {/* Images Right - Dashboard + Mobile Passport */}
@@ -182,44 +153,7 @@ export default function Hero() {
         </SimpleGrid>
       </Container>
 
-      {/* Partners Footer Section */}
-      <Box
-        position="absolute"
-        bottom={0}
-        left={0}
-        right={0}
-        bg="white"
-        py={8}
-        borderTopWidth="1px"
-        borderColor="border"
-      >
-        <Container maxW="1440px" mx="auto" px={{ base: 6, md: 10 }}>
-          <Flex direction={{ base: "column", md: "row" }} align="center" gap={{ base: 6, md: 16 }}>
-            <Text
-              fontSize="10px"
-              fontWeight="800"
-              color="gray.400"
-              textTransform="uppercase"
-              letterSpacing="0.2em"
-              whiteSpace="nowrap"
-            >
-              Parceiros institucionais
-            </Text>
-            <Flex gap={{ base: 8, md: 12 }} align="center" wrap="wrap" justify="center">
-              {PARTNERS.map((p, i) => (
-                <Image
-                  key={i}
-                  src={p.src}
-                  alt={p.name}
-                  width={p.w}
-                  height={p.h}
-                  style={{ opacity: 0.6, filter: 'grayscale(100%)', height: 'auto' }}
-                />
-              ))}
-            </Flex>
-          </Flex>
-        </Container>
-      </Box>
+      {/* Partners Footer Section — hidden */}
     </Box>
   )
 }
